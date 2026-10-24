@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -29,11 +29,11 @@ export function StayPlanner() {
   return (
     <form
       onSubmit={continueToBooking}
-      className="grid border border-[var(--foreground)] bg-[var(--surface)] sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1.25fr_auto]"
+      className="grid gap-5 border bg-[var(--surface)] p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-[1fr_1fr_1.25fr_auto] lg:items-end lg:gap-4"
       aria-label="Start a booking request"
     >
-      <label className="group cursor-pointer border-b p-4 transition-colors duration-150 focus-within:bg-[var(--surface-muted)] focus-within:ring-2 focus-within:ring-[var(--accent)] focus-within:ring-inset hover:bg-[var(--surface-muted)] sm:border-r lg:border-b-0 lg:p-5">
-        <span className="annotation block text-[var(--accent-strong)]">
+      <label className="group grid cursor-pointer gap-3">
+        <span className="annotation text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]">
           Check in
         </span>
         <input
@@ -45,11 +45,11 @@ export function StayPlanner() {
             setCheckIn(value);
             if (checkOut && checkOut <= value) setCheckOut("");
           }}
-          className="mt-3 min-h-8 w-full cursor-pointer bg-transparent text-base font-semibold"
+          className="min-h-16 w-full cursor-pointer border bg-[var(--background)] px-4 text-lg font-medium transition-[border-color,background-color] duration-150 hover:border-[var(--foreground)] focus:border-[var(--accent-strong)] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
         />
       </label>
-      <label className="group cursor-pointer border-b p-4 transition-colors duration-150 focus-within:bg-[var(--surface-muted)] focus-within:ring-2 focus-within:ring-[var(--accent)] focus-within:ring-inset hover:bg-[var(--surface-muted)] lg:border-r lg:border-b-0 lg:p-5">
-        <span className="annotation block text-[var(--accent-strong)]">
+      <label className="group grid cursor-pointer gap-3">
+        <span className="annotation text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]">
           Check out
         </span>
         <input
@@ -58,31 +58,44 @@ export function StayPlanner() {
           value={checkOut}
           min={checkIn || new Date().toISOString().slice(0, 10)}
           onChange={(event) => setCheckOut(event.target.value)}
-          className="mt-3 min-h-8 w-full cursor-pointer bg-transparent text-base font-semibold"
+          className="min-h-16 w-full cursor-pointer border bg-[var(--background)] px-4 text-lg font-medium transition-[border-color,background-color] duration-150 hover:border-[var(--foreground)] focus:border-[var(--accent-strong)] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
         />
       </label>
-      <label className="group cursor-pointer border-b p-4 transition-colors duration-150 focus-within:bg-[var(--surface-muted)] focus-within:ring-2 focus-within:ring-[var(--accent)] focus-within:ring-inset hover:bg-[var(--surface-muted)] sm:border-r lg:border-b-0 lg:p-5">
-        <span className="annotation block text-[var(--accent-strong)]">
+      <label className="group grid cursor-pointer gap-3 sm:col-span-2 lg:col-span-1">
+        <span className="annotation text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]">
           Apartment
         </span>
-        <select
-          name="room"
-          className="mt-3 min-h-8 w-full cursor-pointer bg-transparent text-base font-semibold"
-        >
-          <option value="">Any apartment</option>
-          {rooms.map((option) => (
-            <option key={option.slug} value={option.slug}>
-              {option.name}
-            </option>
-          ))}
-        </select>
+        <span className="relative block">
+          <select
+            name="room"
+            className="min-h-16 w-full cursor-pointer appearance-none border bg-[var(--background)] px-4 pr-12 text-lg font-medium transition-[border-color,background-color] duration-150 hover:border-[var(--foreground)] focus:border-[var(--accent-strong)]"
+          >
+            <option value="">Any apartment</option>
+            {rooms.map((option) => (
+              <option key={option.slug} value={option.slug}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+          <ChevronDown
+            aria-hidden="true"
+            className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]"
+            size={22}
+            strokeWidth={1.75}
+          />
+        </span>
       </label>
       <button
         type="submit"
-        className="flex min-h-20 items-center justify-between gap-8 bg-[var(--accent)] px-6 text-sm font-bold tracking-[0.1em] text-[var(--accent-contrast)] uppercase transition-colors duration-150 hover:bg-[var(--accent-strong)] focus-visible:outline-[var(--foreground)] active:bg-[var(--accent-strong)] sm:col-span-2 lg:col-span-1 lg:min-w-56"
+        className="group flex min-h-16 items-center justify-between gap-8 border border-[var(--accent)] bg-[var(--accent)] px-6 text-sm font-bold tracking-[0.1em] text-[var(--accent-contrast)] uppercase transition-[background-color,border-color] duration-150 hover:border-[var(--accent-strong)] hover:bg-[var(--accent-strong)] focus-visible:outline-[var(--foreground)] active:border-[var(--foreground)] active:bg-[var(--accent-strong)] sm:col-span-2 lg:col-span-1 lg:min-w-56"
       >
         Plan your stay
-        <ArrowRight aria-hidden="true" size={20} strokeWidth={1.75} />
+        <ArrowRight
+          aria-hidden="true"
+          className="transition-transform duration-150 group-hover:translate-x-1"
+          size={22}
+          strokeWidth={1.75}
+        />
       </button>
     </form>
   );
