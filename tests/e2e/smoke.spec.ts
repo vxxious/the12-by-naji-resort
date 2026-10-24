@@ -48,6 +48,13 @@ test("footer exposes every verified social channel", async ({ page }) => {
   }
 });
 
+test("header uses the transparent resort mark", async ({ page }) => {
+  await page.goto("/");
+  await expect(
+    page.locator('header img[src*="the12-by-naji-mark-transparent"]'),
+  ).toBeVisible();
+});
+
 test("contact page uses the branded WhatsApp action", async ({ page }) => {
   await page.goto("/contact");
   const whatsapp = page.getByRole("link", {

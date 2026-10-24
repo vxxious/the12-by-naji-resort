@@ -4,8 +4,6 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 
-import { Button } from "@/components/ui/button";
-
 export function ThemeToggle() {
   const mounted = useSyncExternalStore(
     () => () => undefined,
@@ -15,24 +13,17 @@ export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
 
   if (!mounted) {
-    return (
-      <span
-        aria-hidden="true"
-        className="block size-11 border border-[var(--border)]"
-      />
-    );
+    return <span aria-hidden="true" className="block size-11" />;
   }
 
   const isDark = resolvedTheme === "dark";
 
   return (
-    <Button
+    <button
       type="button"
-      variant="quiet"
-      size="icon"
       aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
       aria-pressed={isDark}
-      className="border-[var(--border)]"
+      className="flex size-11 items-center justify-center transition-colors duration-150 hover:text-[var(--accent-strong)]"
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >
       {isDark ? (
@@ -40,6 +31,6 @@ export function ThemeToggle() {
       ) : (
         <Moon aria-hidden="true" size={17} />
       )}
-    </Button>
+    </button>
   );
 }
