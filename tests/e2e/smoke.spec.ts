@@ -55,6 +55,39 @@ test("header uses the transparent resort mark", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("navigation routes to every dedicated content page", async ({
+  page,
+  isMobile,
+}) => {
+  const destinations = [
+    ["Rooms", "/rooms"],
+    ["Gallery", "/gallery"],
+    ["Tours", "/tours"],
+    ["Events", "/events"],
+    ["Contact", "/contact"],
+  ] as const;
+
+  for (const [label, route] of destinations) {
+    await page.goto("/");
+
+    if (isMobile) {
+      await page.getByRole("button", { name: "Open navigation" }).click();
+      await page
+        .getByRole("navigation", { name: "Mobile" })
+        .getByRole("link", { name: label, exact: true })
+        .click();
+    } else {
+      await page
+        .getByRole("navigation", { name: "Primary" })
+        .getByRole("link", { name: label, exact: true })
+        .click();
+    }
+
+    await expect(page).toHaveURL(new RegExp(`${route}$`));
+    await expect(page.locator("h1")).toBeVisible();
+  }
+});
+
 test("contact page uses the branded WhatsApp action", async ({ page }) => {
   await page.goto("/contact");
   const whatsapp = page.getByRole("link", {

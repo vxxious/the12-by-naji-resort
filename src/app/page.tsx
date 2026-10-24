@@ -3,12 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { StayPlanner } from "@/components/booking/stay-planner";
-import { BookingCta } from "@/components/sections/booking-cta";
-import { ArchitecturalSequence } from "@/components/motion/architectural-sequence";
 import { Reveal } from "@/components/motion/reveal";
-import { RoomRow } from "@/components/rooms/room-row";
-import { facilities } from "@/data/hotel";
-import { featuredRooms } from "@/data/rooms";
+import { BookingCta } from "@/components/sections/booking-cta";
 
 export default function HomePage() {
   return (
@@ -77,115 +73,43 @@ export default function HomePage() {
             <h2 className="section-title text-balance">
               The privacy of an apartment. The rhythm of a resort.
             </h2>
-            <div className="mt-10 grid gap-8 border-t pt-7 text-sm leading-7 text-[var(--muted)] sm:grid-cols-2">
-              <p>
-                Choose from named studio, two-bedroom and three-bedroom
-                apartments across the Elysian and Oasis collections.
-              </p>
-              <p>
-                Each public listing includes a furnished kitchen, Wi-Fi, parking
-                and access to the resort&apos;s shared amenities.
-              </p>
-            </div>
+            <p className="mt-10 max-w-2xl border-t pt-7 text-sm leading-7 text-[var(--muted)] md:text-base">
+              The 12 brings furnished apartments and shared resort amenities
+              together in Utako, Abuja. Choose the stay that suits you, then
+              send a reservation request directly to the resort.
+            </p>
           </Reveal>
         </div>
       </section>
 
       <section className="page-shell py-20 md:py-32">
-        <div className="flex items-end justify-between gap-8 border-b pb-7">
-          <div>
-            <h2 className="text-4xl tracking-[-0.04em] md:text-6xl">
-              Stay your way.
-            </h2>
-          </div>
-          <Link
-            className="annotation hidden hover:text-[var(--accent-strong)] sm:block"
-            href="/rooms"
-          >
-            View all rooms ↗
-          </Link>
-        </div>
-        {featuredRooms.map((room, index) => (
-          <RoomRow key={room.slug} room={room} priority={index === 0} />
-        ))}
-      </section>
-
-      <ArchitecturalSequence>
-        <section className="border-y bg-[var(--surface)] py-20 md:py-32">
-          <div className="page-shell">
-            <div className="grid gap-8 md:grid-cols-12 md:items-end">
-              <div className="md:col-span-8">
-                <h2 className="section-title text-balance">
-                  Space to play, pause and gather.
-                </h2>
-              </div>
-              <p className="text-sm leading-7 text-[var(--muted)] md:col-span-3 md:col-start-10">
-                The shared resort amenities extend the stay beyond the
-                apartment.
-              </p>
-            </div>
-            <div className="mt-14 grid gap-px bg-[var(--border)] md:grid-cols-3">
-              {facilities.map((facility) => (
-                <article
-                  key={facility.title}
-                  data-architectural-plate
-                  className="bg-[var(--background)]"
-                >
-                  <div className="image-plate relative aspect-[4/3]">
-                    <Image
-                      src={facility.image}
-                      alt={`${facility.title} at The 12 by Naji Resort`}
-                      fill
-                      sizes="(min-width: 768px) 33vw, 100vw"
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-2xl tracking-[-0.04em]">
-                      {facility.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                      {facility.description}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      </ArchitecturalSequence>
-
-      <section className="page-shell py-20 md:py-32">
-        <div className="grid gap-10 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-4">
-            <h2 className="section-title">In detail.</h2>
-            <p className="mt-7 max-w-sm text-sm leading-7 text-[var(--muted)]">
-              Explore the apartments, grounds and shared amenities through the
-              resort&apos;s original photography and video tours.
-            </p>
-            <div className="mt-8 flex gap-4">
-              <Link className="annotation border-b pb-2" href="/gallery">
-                Gallery ↗
-              </Link>
-              <Link className="annotation border-b pb-2" href="/tours">
-                Tours ↗
-              </Link>
-            </div>
-          </div>
-          <div className="image-plate relative aspect-[5/4] md:col-span-8">
+        <div className="grid gap-10 md:grid-cols-12 md:items-center">
+          <div className="image-plate relative aspect-[4/5] md:col-span-7 md:aspect-[5/4]">
             <Image
-              src="/images/gallery/exterior-04.jpg"
-              alt="The landscaped grounds at The 12 by Naji Resort"
+              src="/images/hero/rooms-hero.jpg"
+              alt="Furnished apartment at The 12 by Naji Resort"
               fill
-              sizes="(min-width: 768px) 66vw, 100vw"
+              sizes="(min-width: 768px) 58vw, 100vw"
               className="object-cover"
             />
+          </div>
+          <div className="md:col-span-4 md:col-start-9">
+            <p className="annotation text-[var(--accent-strong)]">
+              Two apartment collections
+            </p>
+            <h2 className="mt-5 text-4xl leading-[0.98] tracking-[-0.04em] md:text-6xl">
+              Find the space that fits your stay.
+            </h2>
+            <p className="mt-7 text-sm leading-7 text-[var(--muted)]">
+              Browse the Elysian and Oasis collections, compare their published
+              details and open a dedicated page for each apartment.
+            </p>
             <Link
-              href="/gallery"
-              className="absolute right-4 bottom-4 flex size-14 items-center justify-center bg-[var(--background)] text-[var(--foreground)]"
-              aria-label="Open gallery"
+              href="/rooms"
+              className="annotation mt-8 inline-flex min-h-11 items-center gap-3 border-b border-[var(--foreground)] transition-colors hover:border-[var(--accent-strong)] hover:text-[var(--accent-strong)]"
             >
-              <ArrowUpRight aria-hidden="true" />
+              Explore apartments
+              <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.5} />
             </Link>
           </div>
         </div>
