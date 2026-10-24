@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Clock3, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import { PageIntro } from "@/components/sections/page-intro";
+import { SocialLinks } from "@/components/social/social-links";
 import { hotel } from "@/data/hotel";
 
 export const metadata: Metadata = {
@@ -88,6 +89,12 @@ export default function ContactPage() {
                 </li>
               ))}
             </ul>
+            <div className="mt-8 border-t pt-6">
+              <p className="annotation text-[var(--muted)]">
+                Follow the resort
+              </p>
+              <SocialLinks className="mt-4" />
+            </div>
           </div>
         </div>
       </section>

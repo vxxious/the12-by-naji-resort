@@ -1,13 +1,25 @@
+import { LoaderCircle } from "lucide-react";
+
 export default function Loading() {
   return (
     <div
-      className="page-shell min-h-[60vh] py-16"
+      className="page-shell grid min-h-[60vh] place-items-center py-16"
+      role="status"
       aria-live="polite"
       aria-busy="true"
     >
-      <p className="annotation text-[var(--muted)]">Loading</p>
-      <div className="mt-6 h-20 max-w-3xl animate-pulse bg-[var(--surface-muted)]" />
-      <div className="mt-12 aspect-[16/7] animate-pulse bg-[var(--surface-muted)]" />
+      <div className="flex flex-col items-center text-center">
+        <div className="grid size-20 place-items-center border border-[var(--border)] bg-[var(--surface)]">
+          <LoaderCircle
+            className="route-spinner size-8 text-[var(--accent-strong)]"
+            aria-hidden="true"
+            strokeWidth={1.5}
+          />
+        </div>
+        <p className="annotation mt-5 text-[var(--muted)]">
+          Preparing your stay
+        </p>
+      </div>
     </div>
   );
 }

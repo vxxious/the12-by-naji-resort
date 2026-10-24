@@ -29,6 +29,25 @@ test("room booking action preselects the apartment", async ({ page }) => {
   await expect(page.getByLabel("Apartment")).toHaveValue("santorini");
 });
 
+test("footer exposes every verified social channel", async ({ page }) => {
+  await page.goto("/");
+  const expectedLinks = {
+    Instagram: "https://www.instagram.com/the12bynaji/",
+    TikTok: "https://www.tiktok.com/@the12bynaji_",
+    Facebook: "https://www.facebook.com/profile.php?id=61572388719938",
+    YouTube: "https://www.youtube.com/@The12ByNajiResort",
+    WhatsApp: "https://wa.me/2349018289732",
+  };
+
+  for (const [name, href] of Object.entries(expectedLinks)) {
+    const link = page.getByRole("link", {
+      name: `Visit The 12 by Naji Resort on ${name}`,
+    });
+    await expect(link.first()).toHaveAttribute("href", href);
+    await expect(link.first().locator("svg")).toBeVisible();
+  }
+});
+
 test("gallery supports keyboard navigation and escape", async ({ page }) => {
   await page.goto("/gallery");
   await page.getByRole("button", { name: /Open image 1 of 30/ }).click();

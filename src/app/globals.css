@@ -118,6 +118,23 @@ textarea {
   text-wrap: balance;
 }
 
+@keyframes route-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes route-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.route-spinner {
+  animation: route-spin 1s linear infinite;
+  will-change: transform;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -130,5 +147,10 @@ textarea {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .route-spinner {
+    animation: route-pulse 1s cubic-bezier(0.23, 1, 0.32, 1) infinite !important;
+    transform: none !important;
   }
 }

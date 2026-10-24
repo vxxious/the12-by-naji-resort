@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { SocialLinks } from "@/components/social/social-links";
 import { hotel, navItems } from "@/data/hotel";
 
 export function SiteFooter() {
@@ -50,41 +51,7 @@ export function SiteFooter() {
                 <a href={`mailto:${hotel.email}`}>{hotel.email}</a>
               </li>
             </ul>
-            <div className="mt-6 flex gap-2">
-              <a
-                className="flex size-11 items-center justify-center border"
-                href={hotel.social.instagram}
-                aria-label="Instagram"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="annotation" aria-hidden="true">
-                  IG
-                </span>
-              </a>
-              <a
-                className="flex size-11 items-center justify-center border"
-                href={hotel.social.facebook}
-                aria-label="Facebook"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="annotation" aria-hidden="true">
-                  FB
-                </span>
-              </a>
-              <a
-                className="flex size-11 items-center justify-center border"
-                href={hotel.social.youtube}
-                aria-label="YouTube"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="annotation" aria-hidden="true">
-                  YT
-                </span>
-              </a>
-            </div>
+            <SocialLinks className="mt-6" />
           </div>
         </div>
       </div>
