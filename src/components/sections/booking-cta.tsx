@@ -15,7 +15,7 @@ export function BookingCta() {
           </h2>
         </div>
         <div className="flex items-center justify-between border-t pt-5 md:col-span-3">
-          <span className="annotation">Start your request</span>
+          <span className="annotation">Check availability</span>
           <ArrowUpRight aria-hidden="true" size={30} strokeWidth={1.25} />
         </div>
       </Link>

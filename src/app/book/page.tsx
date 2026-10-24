@@ -8,9 +8,9 @@ import { SocialIcon } from "@/components/icons/social-icons";
 import { hotel } from "@/data/hotel";
 
 export const metadata: Metadata = {
-  title: "Request a Stay",
+  title: "Check Room Availability",
   description:
-    "Plan a stay at The 12 by Naji Resort. Online availability and payment remain subject to direct confirmation.",
+    "Enquire about apartment availability at The 12 by Naji Resort and continue directly to the resort on WhatsApp.",
   alternates: { canonical: "/book" },
 };
 
@@ -31,15 +31,15 @@ export default async function BookPage({ searchParams }: BookPageProps) {
         <div className="page-shell grid gap-10 py-10 md:grid-cols-12 md:items-center md:py-16 lg:gap-16 lg:py-20">
           <div className="md:col-span-5">
             <p className="annotation text-[var(--accent-strong)]">
-              Reservation request · Utako, Abuja
+              Room availability · Utako, Abuja
             </p>
             <h1 className="section-title mt-5 max-w-xl text-balance">
               Plan your stay at The 12.
             </h1>
             <p className="mt-7 max-w-xl text-base leading-8 font-medium text-[var(--muted)]">
-              Share your preferred apartment and dates. The resort team will
-              confirm availability, the final rate and the next reservation step
-              directly with you.
+              Share your preferred apartment and dates, then continue to
+              WhatsApp. The resort team will confirm availability, the final
+              rate and the next reservation step directly with you.
             </p>
 
             <dl className="mt-9 grid grid-cols-2 border-y">
@@ -88,13 +88,13 @@ export default async function BookPage({ searchParams }: BookPageProps) {
                 What happens next.
               </h2>
               <p className="mt-4 text-base leading-7 text-[var(--muted)]">
-                This is a reservation enquiry. Your stay is confirmed only after
-                the resort verifies availability and contacts you.
+                This is an availability enquiry. Your stay is confirmed only
+                after the resort verifies the apartment and dates with you.
               </p>
 
               <ol className="mt-8 border-t">
                 {[
-                  "Send your preferred apartment and travel dates.",
+                  "Send the prefilled availability enquiry on WhatsApp.",
                   "The resort confirms availability and the final rate.",
                   "Complete the reservation directly with the resort.",
                 ].map((step, index) => (

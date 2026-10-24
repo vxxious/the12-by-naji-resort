@@ -79,8 +79,8 @@ export default function HomePage() {
             </h2>
             <p className="mt-10 max-w-2xl border-t pt-7 text-base leading-8 font-medium text-[var(--muted)]">
               The 12 brings furnished apartments and shared resort amenities
-              together in Utako, Abuja. Choose the stay that suits you, then
-              send a reservation request directly to the resort.
+              together in Utako, Abuja. Choose the stay that suits you, then ask
+              the resort to confirm availability on WhatsApp.
             </p>
           </Reveal>
         </div>

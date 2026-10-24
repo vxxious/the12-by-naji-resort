@@ -190,11 +190,44 @@ test("gallery supports keyboard navigation and escape", async ({ page }) => {
 
 test("booking form exposes validation errors", async ({ page }) => {
   await page.goto("/book");
-  await page.getByRole("button", { name: "Send reservation request" }).click();
+  await page.getByRole("button", { name: "Send enquiry on WhatsApp" }).click();
   await expect(page.getByText("Enter your full name")).toBeVisible();
   await expect(
     page.getByRole("alert").filter({ hasText: "Select an apartment" }),
   ).toBeVisible();
+});
+
+test("booking form prepares a WhatsApp availability enquiry", async ({
+  page,
+}) => {
+  await page.context().route("https://wa.me/**", (route) =>
+    route.fulfill({ status: 200, contentType: "text/plain", body: "WhatsApp" }),
+  );
+  await page.goto(
+    "/book?room=santorini&checkIn=2030-01-10&checkOut=2030-01-13",
+  );
+
+  const form = page.getByRole("form", { name: "Room availability enquiry" });
+  await expect(form.getByLabel("Apartment")).toHaveValue("santorini");
+  await form.getByLabel("Full name").fill("Amina Bello");
+  await form.getByLabel("Email address").fill("amina@example.com");
+  await form.getByLabel("Phone number").fill("+234 900 000 0000");
+
+  const whatsappPagePromise = page.context().waitForEvent("page");
+  await form.getByRole("button", { name: "Send enquiry on WhatsApp" }).click();
+
+  const whatsappPage = await whatsappPagePromise;
+  await whatsappPage.waitForLoadState();
+  const message = new URL(whatsappPage.url()).searchParams.get("text");
+  expect(message).toContain("Apartment: Santorini");
+  expect(message).toContain("Check-in: 10/01/2030");
+  expect(message).toContain("Length of stay: 3 nights");
+  expect(message).toContain(
+    "Please confirm whether this apartment is available",
+  );
+  expect(message).toContain(
+    "This is an availability enquiry, not a confirmed reservation.",
+  );
 });
 
 test("mobile navigation opens and returns focus", async ({

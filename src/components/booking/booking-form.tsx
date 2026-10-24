@@ -1,19 +1,11 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  AlertCircle,
-  ArrowRight,
-  CalendarDays,
-  CheckCircle2,
-  ChevronDown,
-  LoaderCircle,
-  ShieldCheck,
-} from "lucide-react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { CalendarDays, ChevronDown, ShieldCheck } from "lucide-react";
+import { useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
 
+import { SocialIcon } from "@/components/icons/social-icons";
 import { Button } from "@/components/ui/button";
 import { hotel } from "@/data/hotel";
 import { formatRoomType, rooms } from "@/data/rooms";
@@ -37,17 +29,13 @@ export function BookingForm({
   initialCheckIn = "",
   initialCheckOut = "",
 }: BookingFormProps) {
-  const [status, setStatus] = useState<
-    | { type: "idle" }
-    | { type: "success"; message: string }
-    | { type: "error"; message: string }
-  >({ type: "idle" });
   const {
     register,
     handleSubmit,
     control,
+    setError,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<BookingRequestInput, unknown, BookingRequest>({
     resolver: zodResolver(bookingRequestSchema),
     defaultValues: {
@@ -73,41 +61,37 @@ export function BookingForm({
     setValue("lengthOfStay", nights, { shouldValidate: nights > 0 });
   }, [nights, setValue]);
 
-  async function onSubmit(values: BookingRequest) {
-    setStatus({ type: "idle" });
-    try {
-      const response = await fetch("/api/booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      const result = (await response.json()) as {
-        success: boolean;
-        message?: string;
-        reference?: string;
-      };
-      if (!response.ok || !result.success) {
-        setStatus({
-          type: "error",
-          message:
-            result.message ??
-            "The booking request could not be sent. Please contact the resort.",
-        });
-        return;
-      }
-      setStatus({
-        type: "success",
-        message: result.reference
-          ? `Request received. Reference: ${result.reference}`
-          : "Your request was received.",
-      });
-    } catch {
-      setStatus({
-        type: "error",
-        message:
-          "The booking service could not be reached. Please contact the resort directly.",
-      });
+  function onSubmit(values: BookingRequest) {
+    const room = rooms.find((item) => item.slug === values.roomSlug);
+    if (!room) {
+      setError("roomSlug", { message: "Select an apartment" });
+      return;
     }
+
+    const block = room.block === "elysian" ? "Elysian" : "Oasis";
+    const message = [
+      `Hello ${hotel.name},`,
+      "",
+      "I would like to enquire about availability for this stay:",
+      "",
+      `Guest: ${values.fullName}`,
+      `Apartment: ${room.name} (${block} · ${formatRoomType(room.type)})`,
+      `Check-in: ${formatStayDate(values.checkIn)}`,
+      `Check-out: ${formatStayDate(values.checkOut)}`,
+      `Length of stay: ${values.lengthOfStay} night${values.lengthOfStay === 1 ? "" : "s"}`,
+      `Phone: ${values.phone}`,
+      `Email: ${values.email}`,
+      "",
+      "Please confirm whether this apartment is available for these dates, the final rate, and the next reservation steps.",
+      "",
+      "This is an availability enquiry, not a confirmed reservation.",
+    ].join("\n");
+
+    window.open(
+      `${hotel.social.whatsapp}?text=${encodeURIComponent(message)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
   }
 
   const fieldClass =
@@ -117,19 +101,19 @@ export function BookingForm({
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
-      aria-label="Reservation request"
+      aria-label="Room availability enquiry"
       className="border bg-[var(--surface)]"
     >
       <header className="border-b p-5 sm:p-8">
         <p className="annotation text-[var(--accent-strong)]">
-          Reservation details
+          Availability enquiry
         </p>
         <h2 className="mt-4 text-3xl leading-tight tracking-[-0.035em] sm:text-4xl">
           Tell us about your stay.
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--muted)]">
-          Complete the details below so the resort can review your preferred
-          apartment and dates.
+          Complete the details below, then continue to WhatsApp so the resort
+          can check your preferred apartment and dates.
         </p>
       </header>
 
@@ -139,8 +123,7 @@ export function BookingForm({
             Guest details
           </legend>
           <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-            We will use these details only to respond to this reservation
-            request.
+            These details will be included in your WhatsApp enquiry.
           </p>
 
           <div className="mt-7 grid gap-6 sm:grid-cols-2">
@@ -198,8 +181,8 @@ export function BookingForm({
             Stay details
           </legend>
           <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-            Choose your preferred apartment and travel dates. Availability is
-            confirmed after submission.
+            Choose your preferred apartment and travel dates. The resort will
+            confirm availability after receiving your WhatsApp message.
           </p>
 
           <div className="mt-7 grid gap-6 sm:grid-cols-2">
@@ -211,6 +194,7 @@ export function BookingForm({
               <span className="relative mt-3 block min-w-0">
                 <select
                   {...register("roomSlug")}
+                  defaultValue={initialRoom}
                   className={cn(
                     fieldClass,
                     "appearance-none pr-12",
@@ -310,75 +294,25 @@ export function BookingForm({
             strokeWidth={1.75}
           />
           <p>
-            No payment is taken here. Submitting this form requests a stay; it
-            does not confirm availability or complete a reservation.
+            No payment is taken here. WhatsApp will open with your enquiry ready
+            to send. The resort will confirm availability, the final rate and
+            the next reservation steps directly with you.
           </p>
         </div>
-
-        {status.type !== "idle" && (
-          <div
-            role="status"
-            aria-live="polite"
-            className={cn(
-              "flex items-start gap-3 border p-4 text-sm leading-6",
-              status.type === "error"
-                ? "border-red-700/50"
-                : "border-emerald-700/50",
-            )}
-          >
-            {status.type === "error" ? (
-              <AlertCircle
-                aria-hidden="true"
-                className="mt-0.5 shrink-0"
-                size={18}
-              />
-            ) : (
-              <CheckCircle2
-                aria-hidden="true"
-                className="mt-0.5 shrink-0"
-                size={18}
-              />
-            )}
-            {status.message}
-          </div>
-        )}
 
         <div className="flex flex-col gap-4 border-t pt-8 sm:flex-row sm:items-center sm:justify-between">
           <Button
             type="submit"
-            disabled={isSubmitting}
             className="min-h-14 w-full justify-between px-6 sm:w-auto sm:min-w-64"
           >
-            {isSubmitting ? (
-              <>
-                Sending request
-                <LoaderCircle
-                  className="animate-spin"
-                  aria-hidden="true"
-                  size={18}
-                />
-              </>
-            ) : (
-              <>
-                Send reservation request
-                <ArrowRight aria-hidden="true" size={19} />
-              </>
-            )}
+            Send enquiry on WhatsApp
+            <SocialIcon name="whatsapp" size={20} />
           </Button>
           <p className="text-xs leading-5 text-[var(--muted)] sm:max-w-56 sm:text-right">
             Need help now? Call{" "}
             <a className="underline underline-offset-4" href={hotel.phoneHref}>
               {hotel.phoneDisplay}
             </a>
-            {" or "}
-            <Link
-              className="underline underline-offset-4"
-              href={hotel.social.whatsapp}
-              target="_blank"
-              rel="noreferrer"
-            >
-              use WhatsApp
-            </Link>
             .
           </p>
         </div>
