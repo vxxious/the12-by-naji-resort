@@ -6,19 +6,21 @@ const room = (
   block: RoomBlock,
   type: RoomType,
   priceNgn: number,
-  extension: "jpg" | "png" = "jpg",
+  photographyPending = false,
 ): Room => ({
   name,
   slug,
   block,
   type,
   priceNgn,
-  images: Array.from(
-    { length: 4 },
-    (_, index) =>
-      `/images/rooms/${block}/${slug}-${String(index + 1).padStart(2, "0")}.${extension}`,
-  ),
-  photographyPending: extension === "png",
+  images: photographyPending
+    ? ["/images/rooms/photography-coming-soon.webp"]
+    : Array.from(
+        { length: 4 },
+        (_, index) =>
+          `/images/rooms/${block}/${slug}-${String(index + 1).padStart(2, "0")}.jpg`,
+      ),
+  photographyPending,
 });
 
 export const rooms: Room[] = [
@@ -29,16 +31,16 @@ export const rooms: Room[] = [
   room("Ibiza", "ibiza", "elysian", "2-bedroom", 150_000),
   room("Kyoto", "kyoto", "elysian", "2-bedroom", 150_000),
   room("Monaco", "monaco", "elysian", "studio", 90_000),
-  room("Bali", "bali", "elysian", "studio", 90_000, "png"),
+  room("Bali", "bali", "elysian", "studio", 90_000, true),
   room("Tokyo", "tokyo", "elysian", "studio", 90_000),
   room("Grandview", "grandview", "oasis", "3-bedroom", 150_000),
   room("Essence", "essence", "oasis", "3-bedroom", 150_000),
   room("Palms", "palms", "oasis", "2-bedroom", 120_000),
   room("Eden", "eden", "oasis", "2-bedroom", 120_000),
   room("Lotus", "lotus", "oasis", "2-bedroom", 120_000),
-  room("Aurora", "aurora", "oasis", "studio", 70_000, "png"),
+  room("Aurora", "aurora", "oasis", "studio", 70_000, true),
   room("Hive", "hive", "oasis", "studio", 70_000),
-  room("Renaissance", "renaissance", "oasis", "studio", 70_000, "png"),
+  room("Renaissance", "renaissance", "oasis", "studio", 70_000, true),
 ];
 
 export const featuredRooms = ["bora-bora", "santorini", "grandview", "hive"]

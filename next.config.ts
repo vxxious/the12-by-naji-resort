@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1", "localhost", "192.168.1.152"],
   images: {
     formats: ["image/avif", "image/webp"],
+    deviceSizes: [360, 390, 430, 640, 768, 1024, 1280, 1536, 1600],
+    imageSizes: [32, 48, 64, 96, 128, 256, 384],
+    qualities: [70, 75],
+    minimumCacheTTL: 2_592_000,
   },
   async redirects() {
     return [

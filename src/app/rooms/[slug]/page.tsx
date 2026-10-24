@@ -74,8 +74,12 @@ export default async function RoomPage({ params }: RoomPageProps) {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-2 md:grid-cols-12 md:grid-rows-2">
-          <div className="image-plate relative aspect-[4/3] md:col-span-8 md:row-span-2 md:aspect-auto md:min-h-[44rem]">
+        <div
+          className={`mt-12 grid gap-2 md:grid-cols-12 ${room.photographyPending ? "" : "md:grid-rows-2"}`}
+        >
+          <div
+            className={`image-plate relative aspect-[4/3] md:aspect-auto md:min-h-[44rem] ${room.photographyPending ? "md:col-span-12" : "md:col-span-8 md:row-span-2"}`}
+          >
             <Image
               src={room.images[0]}
               alt={

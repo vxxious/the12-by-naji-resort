@@ -84,6 +84,27 @@ test("header uses the transparent resort mark", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("social sharing metadata uses the branded Open Graph image", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    "https://the12bynajiresort.com/og-image.jpg",
+  );
+  await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute(
+    "content",
+    "1200",
+  );
+  await expect(
+    page.locator('meta[property="og:image:height"]'),
+  ).toHaveAttribute("content", "630");
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+    "content",
+    "summary_large_image",
+  );
+});
+
 test("theme toggle is visible once per breakpoint and changes theme", async ({
   page,
   isMobile,
@@ -201,7 +222,11 @@ test("booking form prepares a WhatsApp availability enquiry", async ({
   page,
 }) => {
   await page.context().route("https://wa.me/**", (route) =>
-    route.fulfill({ status: 200, contentType: "text/plain", body: "WhatsApp" }),
+    route.fulfill({
+      status: 200,
+      contentType: "text/plain",
+      body: "WhatsApp",
+    }),
   );
   await page.goto(
     "/book?room=santorini&checkIn=2030-01-10&checkOut=2030-01-13",

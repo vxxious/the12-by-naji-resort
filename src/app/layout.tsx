@@ -36,15 +36,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_NG",
+    url: "/",
     siteName: hotel.name,
     title: "The 12 by Naji Resort",
     description: hotel.description,
     images: [
       {
-        url: "/images/hero/homepage-hero-original.jpg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "The 12 by Naji Resort in Utako, Abuja",
+        alt: "The 12 by Naji Resort, an apartment resort in Utako, Abuja",
       },
     ],
   },
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: hotel.name,
     description: hotel.description,
-    images: ["/images/hero/homepage-hero-original.jpg"],
+    images: ["/og-image.jpg"],
   },
   icons: {
     icon: "/images/branding/the12-by-naji-favicon.jpg",
@@ -96,7 +97,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body
         className={`${manrope.variable} ${azeretMono.variable} antialiased`}
       >

@@ -63,6 +63,7 @@ export function GalleryGrid() {
                   src={image.src}
                   alt={image.alt}
                   fill
+                  quality={70}
                   sizes={
                     large
                       ? "(min-width: 768px) 66vw, 100vw"

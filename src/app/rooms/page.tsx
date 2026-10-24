@@ -78,7 +78,11 @@ export default function RoomsPage() {
                 </p>
               </div>
               {collectionRooms.map((room, index) => (
-                <RoomRow key={room.slug} room={room} priority={index === 0} />
+                <RoomRow
+                  key={room.slug}
+                  room={room}
+                  priority={collection.id === "elysian" && index === 0}
+                />
               ))}
             </section>
           );
