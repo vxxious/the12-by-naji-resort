@@ -19,13 +19,12 @@ export function MobileMenu() {
       <Dialog.Trigger asChild>
         <button
           type="button"
-          className="group flex min-h-11 items-center gap-2.5 lg:hidden"
+          className="group flex size-11 items-center justify-center lg:hidden"
           aria-label="Open navigation"
         >
-          <span className="annotation">Menu</span>
           <Menu
             aria-hidden="true"
-            size={21}
+            size={24}
             strokeWidth={1.5}
             className="transition-transform duration-200 group-hover:scale-x-110"
           />

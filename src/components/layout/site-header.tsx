@@ -32,14 +32,10 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-4 justify-self-end lg:gap-3">
-          <Link
-            href="/book"
-            className="annotation hidden text-[var(--accent-strong)] min-[390px]:inline-flex lg:hidden"
-          >
-            Book now
-          </Link>
-          <ThemeToggle />
+        <div className="flex items-center justify-self-end lg:gap-3">
+          <div className="hidden lg:block">
+            <ThemeToggle />
+          </div>
           <Button asChild className="hidden lg:inline-flex">
             <Link href="/book">Book now</Link>
           </Button>

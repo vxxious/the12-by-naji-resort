@@ -55,11 +55,25 @@ test("header uses the transparent resort mark", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("header theme toggle is visible and changes theme", async ({ page }) => {
+test("theme toggle is visible once per breakpoint and changes theme", async ({
+  page,
+  isMobile,
+}) => {
   await page.goto("/");
-  const toggle = page
-    .getByRole("button", { name: /Switch to (dark|light) theme/ })
-    .first();
+  const headerToggle = page
+    .locator("header")
+    .getByRole("button", { name: /Switch to (dark|light) theme/ });
+
+  if (isMobile) {
+    await expect(headerToggle).toBeHidden();
+    await page.getByRole("button", { name: "Open navigation" }).tap();
+  }
+
+  const toggle = isMobile
+    ? page
+        .getByRole("dialog", { name: "Navigation" })
+        .getByRole("button", { name: /Switch to (dark|light) theme/ })
+    : headerToggle;
   await expect(toggle).toBeVisible();
   const initialLabel = await toggle.getAttribute("aria-label");
   await toggle.click();
@@ -164,6 +178,8 @@ test("mobile navigation opens and returns focus", async ({
   );
   await page.goto("/");
   const trigger = page.getByRole("button", { name: "Open navigation" });
+  await expect(page.locator("header").getByText("Book now")).toBeHidden();
+  await expect(trigger).toHaveText("");
   await trigger.tap();
   await expect(page.getByRole("dialog", { name: "Navigation" })).toBeVisible();
   await page.keyboard.press("Escape");
