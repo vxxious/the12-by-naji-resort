@@ -23,7 +23,8 @@ export function ThemeToggle() {
       type="button"
       aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
       aria-pressed={isDark}
-      className="flex size-11 items-center justify-center transition-colors duration-150 hover:text-[var(--accent-strong)]"
+      title={`Switch to ${isDark ? "light" : "dark"} theme`}
+      className="flex size-11 shrink-0 items-center justify-center border bg-[var(--surface)] transition-colors duration-150 hover:border-[var(--accent)] hover:text-[var(--accent-strong)]"
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >
       {isDark ? (

@@ -39,9 +39,7 @@ export function SiteHeader() {
           >
             Book now
           </Link>
-          <div className="hidden lg:block">
-            <ThemeToggle />
-          </div>
+          <ThemeToggle />
           <Button asChild className="hidden lg:inline-flex">
             <Link href="/book">Book now</Link>
           </Button>

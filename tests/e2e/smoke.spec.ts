@@ -55,6 +55,21 @@ test("header uses the transparent resort mark", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("header theme toggle is visible and changes theme", async ({ page }) => {
+  await page.goto("/");
+  const toggle = page
+    .getByRole("button", { name: /Switch to (dark|light) theme/ })
+    .first();
+  await expect(toggle).toBeVisible();
+  const initialLabel = await toggle.getAttribute("aria-label");
+  await toggle.click();
+  await expect(toggle).toHaveAccessibleName(
+    initialLabel === "Switch to dark theme"
+      ? "Switch to light theme"
+      : "Switch to dark theme",
+  );
+});
+
 test("navigation routes to every dedicated content page", async ({
   page,
   isMobile,
@@ -149,7 +164,7 @@ test("mobile navigation opens and returns focus", async ({
   );
   await page.goto("/");
   const trigger = page.getByRole("button", { name: "Open navigation" });
-  await trigger.click();
+  await trigger.tap();
   await expect(page.getByRole("dialog", { name: "Navigation" })).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(trigger).toBeFocused();

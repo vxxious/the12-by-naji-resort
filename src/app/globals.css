@@ -131,6 +131,26 @@ textarea {
   }
 }
 
+@keyframes mobile-menu-overlay-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes mobile-menu-panel-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+.mobile-menu-overlay[data-state="open"] {
+  animation: mobile-menu-overlay-in 180ms var(--ease-out);
+}
+
+.mobile-menu-panel[data-state="open"] {
+  animation: mobile-menu-panel-in 320ms var(--ease-out);
+}
+
 .route-spinner {
   animation: route-spin 800ms linear infinite;
   will-change: transform;
