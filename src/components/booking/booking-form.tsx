@@ -1,7 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AlertCircle, CheckCircle2, LoaderCircle } from "lucide-react";
+import {
+  AlertCircle,
+  ArrowRight,
+  CalendarDays,
+  CheckCircle2,
+  ChevronDown,
+  LoaderCircle,
+  ShieldCheck,
+} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
@@ -12,9 +20,11 @@ import { formatRoomType, rooms } from "@/data/rooms";
 import {
   bookingRequestSchema,
   calculateLengthOfStay,
+  formatStayDate,
   type BookingRequest,
   type BookingRequestInput,
 } from "@/lib/booking/schema";
+import { cn } from "@/lib/utils";
 
 interface BookingFormProps {
   initialRoom?: string;
@@ -52,11 +62,12 @@ export function BookingForm({
     },
   });
 
-  const [checkIn, checkOut] = useWatch({
+  const [roomSlug, checkIn, checkOut] = useWatch({
     control,
-    name: ["checkIn", "checkOut"],
+    name: ["roomSlug", "checkIn", "checkOut"],
   });
   const nights = calculateLengthOfStay(checkIn, checkOut);
+  const selectedRoom = rooms.find((room) => room.slug === roomSlug);
 
   useEffect(() => {
     setValue("lengthOfStay", nights, { shouldValidate: nights > 0 });
@@ -100,160 +111,277 @@ export function BookingForm({
   }
 
   const fieldClass =
-    "mt-2 min-h-12 w-full border bg-[var(--surface)] px-3 text-sm focus:border-[var(--accent)]";
+    "min-h-14 w-full min-w-0 border bg-[var(--background)] px-4 text-base font-medium placeholder:text-[var(--muted)] transition-colors duration-150 hover:border-[var(--muted)] focus:border-[var(--accent-strong)]";
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-8">
-      <div className="grid gap-6 sm:grid-cols-2">
-        <Field
-          label="Full name"
-          error={errors.fullName?.message}
-          className="sm:col-span-2"
-        >
-          <input
-            {...register("fullName")}
-            autoComplete="name"
-            className={fieldClass}
-            aria-invalid={Boolean(errors.fullName)}
-          />
-        </Field>
-        <Field label="Email" error={errors.email?.message}>
-          <input
-            {...register("email")}
-            type="email"
-            autoComplete="email"
-            className={fieldClass}
-            aria-invalid={Boolean(errors.email)}
-          />
-        </Field>
-        <Field label="Phone number" error={errors.phone?.message}>
-          <input
-            {...register("phone")}
-            type="tel"
-            autoComplete="tel"
-            inputMode="tel"
-            className={fieldClass}
-            aria-invalid={Boolean(errors.phone)}
-          />
-        </Field>
-        <Field
-          label="Apartment"
-          error={errors.roomSlug?.message}
-          className="sm:col-span-2"
-        >
-          <select
-            {...register("roomSlug")}
-            className={fieldClass}
-            aria-invalid={Boolean(errors.roomSlug)}
-          >
-            <option value="">Select an apartment</option>
-            {rooms.map((room) => (
-              <option key={room.slug} value={room.slug}>
-                {room.name} — {room.block} · {formatRoomType(room.type)}
-              </option>
-            ))}
-          </select>
-        </Field>
-        <Field label="Check in" error={errors.checkIn?.message}>
-          <input
-            {...register("checkIn")}
-            type="date"
-            min={new Date().toISOString().slice(0, 10)}
-            className={fieldClass}
-            aria-invalid={Boolean(errors.checkIn)}
-          />
-        </Field>
-        <Field label="Check out" error={errors.checkOut?.message}>
-          <input
-            {...register("checkOut")}
-            type="date"
-            min={checkIn || new Date().toISOString().slice(0, 10)}
-            className={fieldClass}
-            aria-invalid={Boolean(errors.checkOut)}
-          />
-        </Field>
-        <div className="border-y py-5 sm:col-span-2">
-          <span className="annotation text-[var(--muted)]">Length of stay</span>
-          <p className="mt-2 text-2xl tracking-[-0.04em]">
-            {nights > 0
-              ? `${nights} night${nights === 1 ? "" : "s"}`
-              : "Select valid dates"}
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+      aria-label="Reservation request"
+      className="border bg-[var(--surface)]"
+    >
+      <header className="border-b p-5 sm:p-8">
+        <p className="annotation text-[var(--accent-strong)]">
+          Reservation details
+        </p>
+        <h2 className="mt-4 text-3xl leading-tight tracking-[-0.035em] sm:text-4xl">
+          Tell us about your stay.
+        </h2>
+        <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--muted)]">
+          Complete the details below so the resort can review your preferred
+          apartment and dates.
+        </p>
+      </header>
+
+      <div className="space-y-12 p-5 sm:p-8">
+        <fieldset>
+          <legend className="text-2xl font-medium tracking-[-0.025em]">
+            Guest details
+          </legend>
+          <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+            We will use these details only to respond to this reservation
+            request.
           </p>
+
+          <div className="mt-7 grid gap-6 sm:grid-cols-2">
+            <Field
+              label="Full name"
+              error={errors.fullName?.message}
+              className="sm:col-span-2"
+            >
+              <input
+                {...register("fullName")}
+                autoComplete="name"
+                placeholder="First and last name"
+                className={cn(
+                  fieldClass,
+                  "mt-3",
+                  errors.fullName && "border-red-700 dark:border-red-400",
+                )}
+                aria-invalid={Boolean(errors.fullName)}
+              />
+            </Field>
+            <Field label="Email address" error={errors.email?.message}>
+              <input
+                {...register("email")}
+                type="email"
+                autoComplete="email"
+                placeholder="you@example.com"
+                className={cn(
+                  fieldClass,
+                  "mt-3",
+                  errors.email && "border-red-700 dark:border-red-400",
+                )}
+                aria-invalid={Boolean(errors.email)}
+              />
+            </Field>
+            <Field label="Phone number" error={errors.phone?.message}>
+              <input
+                {...register("phone")}
+                type="tel"
+                autoComplete="tel"
+                inputMode="tel"
+                placeholder="+234 000 000 0000"
+                className={cn(
+                  fieldClass,
+                  "mt-3",
+                  errors.phone && "border-red-700 dark:border-red-400",
+                )}
+                aria-invalid={Boolean(errors.phone)}
+              />
+            </Field>
+          </div>
+        </fieldset>
+
+        <fieldset className="border-t pt-10">
+          <legend className="px-0 text-2xl font-medium tracking-[-0.025em]">
+            Stay details
+          </legend>
+          <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
+            Choose your preferred apartment and travel dates. Availability is
+            confirmed after submission.
+          </p>
+
+          <div className="mt-7 grid gap-6 sm:grid-cols-2">
+            <Field
+              label="Apartment"
+              error={errors.roomSlug?.message}
+              className="sm:col-span-2"
+            >
+              <span className="relative mt-3 block min-w-0">
+                <select
+                  {...register("roomSlug")}
+                  className={cn(
+                    fieldClass,
+                    "appearance-none pr-12",
+                    errors.roomSlug && "border-red-700 dark:border-red-400",
+                  )}
+                  aria-invalid={Boolean(errors.roomSlug)}
+                >
+                  <option value="">Select an apartment</option>
+                  {rooms.map((room) => (
+                    <option key={room.slug} value={room.slug}>
+                      {room.name} —{" "}
+                      {room.block === "elysian" ? "Elysian" : "Oasis"} ·{" "}
+                      {formatRoomType(room.type)}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown
+                  aria-hidden="true"
+                  className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-[var(--muted)]"
+                  size={21}
+                  strokeWidth={1.75}
+                />
+              </span>
+            </Field>
+
+            <Field label="Check in" error={errors.checkIn?.message}>
+              <DateControl value={checkIn} invalid={Boolean(errors.checkIn)}>
+                <input
+                  {...register("checkIn")}
+                  type="date"
+                  min={new Date().toISOString().slice(0, 10)}
+                  className="absolute inset-0 z-10 h-full w-full min-w-0 cursor-pointer opacity-0"
+                  aria-invalid={Boolean(errors.checkIn)}
+                />
+              </DateControl>
+            </Field>
+            <Field label="Check out" error={errors.checkOut?.message}>
+              <DateControl value={checkOut} invalid={Boolean(errors.checkOut)}>
+                <input
+                  {...register("checkOut")}
+                  type="date"
+                  min={checkIn || new Date().toISOString().slice(0, 10)}
+                  className="absolute inset-0 z-10 h-full w-full min-w-0 cursor-pointer opacity-0"
+                  aria-invalid={Boolean(errors.checkOut)}
+                />
+              </DateControl>
+            </Field>
+          </div>
+
+          <div className="mt-8 grid border-t sm:grid-cols-3">
+            <SummaryItem
+              label="Apartment"
+              value={
+                selectedRoom
+                  ? `${selectedRoom.name} · ${formatRoomType(selectedRoom.type)}`
+                  : "Not selected"
+              }
+              className="sm:border-r"
+            />
+            <SummaryItem
+              label="Dates"
+              value={
+                checkIn && checkOut
+                  ? `${formatStayDate(checkIn)} — ${formatStayDate(checkOut)}`
+                  : "Not selected"
+              }
+              className="sm:border-r sm:pl-5"
+            />
+            <SummaryItem
+              label="Length of stay"
+              value={
+                nights > 0
+                  ? `${nights} night${nights === 1 ? "" : "s"}`
+                  : "Pending dates"
+              }
+              className="sm:pl-5"
+            />
+          </div>
           <input
             type="hidden"
             {...register("lengthOfStay", { valueAsNumber: true })}
           />
+        </fieldset>
+
+        <div className="sr-only" aria-hidden="true">
+          <label>
+            Company
+            <input {...register("company")} tabIndex={-1} autoComplete="off" />
+          </label>
         </div>
-      </div>
 
-      <div className="sr-only" aria-hidden="true">
-        <label>
-          Company
-          <input {...register("company")} tabIndex={-1} autoComplete="off" />
-        </label>
-      </div>
-
-      <div className="border-l border-[var(--accent)] pl-5 text-sm leading-6 text-[var(--muted)]">
-        This form does not confirm availability or take payment. The existing
-        reservation provider is still awaiting verification.
-      </div>
-
-      {status.type !== "idle" && (
-        <div
-          role="status"
-          className={`flex items-start gap-3 border p-4 text-sm leading-6 ${
-            status.type === "error"
-              ? "border-red-700/50"
-              : "border-emerald-700/50"
-          }`}
-        >
-          {status.type === "error" ? (
-            <AlertCircle
-              aria-hidden="true"
-              className="mt-0.5 shrink-0"
-              size={18}
-            />
-          ) : (
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 shrink-0"
-              size={18}
-            />
-          )}
-          {status.message}
+        <div className="flex items-start gap-3 border bg-[var(--background)] p-4 text-sm leading-6 text-[var(--muted)]">
+          <ShieldCheck
+            aria-hidden="true"
+            className="mt-0.5 shrink-0 text-[var(--accent-strong)]"
+            size={20}
+            strokeWidth={1.75}
+          />
+          <p>
+            No payment is taken here. Submitting this form requests a stay; it
+            does not confirm availability or complete a reservation.
+          </p>
         </div>
-      )}
 
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-        <Button type="submit" disabled={isSubmitting} className="min-w-52">
-          {isSubmitting ? (
-            <>
-              <LoaderCircle
-                className="animate-spin"
-                aria-hidden="true"
-                size={17}
-              />{" "}
-              Sending
-            </>
-          ) : (
-            "Request booking"
-          )}
-        </Button>
-        <p className="text-xs leading-5 text-[var(--muted)]">
-          Prefer direct contact? Call{" "}
-          <a className="underline" href={hotel.phoneHref}>
-            {hotel.phoneDisplay}
-          </a>
-          {" or "}
-          <Link
-            className="underline"
-            href={hotel.social.whatsapp}
-            target="_blank"
+        {status.type !== "idle" && (
+          <div
+            role="status"
+            aria-live="polite"
+            className={cn(
+              "flex items-start gap-3 border p-4 text-sm leading-6",
+              status.type === "error"
+                ? "border-red-700/50"
+                : "border-emerald-700/50",
+            )}
           >
-            use WhatsApp
-          </Link>
-          .
-        </p>
+            {status.type === "error" ? (
+              <AlertCircle
+                aria-hidden="true"
+                className="mt-0.5 shrink-0"
+                size={18}
+              />
+            ) : (
+              <CheckCircle2
+                aria-hidden="true"
+                className="mt-0.5 shrink-0"
+                size={18}
+              />
+            )}
+            {status.message}
+          </div>
+        )}
+
+        <div className="flex flex-col gap-4 border-t pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="min-h-14 w-full justify-between px-6 sm:w-auto sm:min-w-64"
+          >
+            {isSubmitting ? (
+              <>
+                Sending request
+                <LoaderCircle
+                  className="animate-spin"
+                  aria-hidden="true"
+                  size={18}
+                />
+              </>
+            ) : (
+              <>
+                Send reservation request
+                <ArrowRight aria-hidden="true" size={19} />
+              </>
+            )}
+          </Button>
+          <p className="text-xs leading-5 text-[var(--muted)] sm:max-w-56 sm:text-right">
+            Need help now? Call{" "}
+            <a className="underline underline-offset-4" href={hotel.phoneHref}>
+              {hotel.phoneDisplay}
+            </a>
+            {" or "}
+            <Link
+              className="underline underline-offset-4"
+              href={hotel.social.whatsapp}
+              target="_blank"
+              rel="noreferrer"
+            >
+              use WhatsApp
+            </Link>
+            .
+          </p>
+        </div>
       </div>
     </form>
   );
@@ -271,7 +399,7 @@ function Field({
   className?: string;
 }) {
   return (
-    <label className={className}>
+    <label className={cn("grid min-w-0", className)}>
       <span className="annotation text-[var(--muted)]">{label}</span>
       {children}
       {error && (
@@ -283,5 +411,55 @@ function Field({
         </span>
       )}
     </label>
+  );
+}
+
+function DateControl({
+  value,
+  invalid,
+  children,
+}: {
+  value?: string;
+  invalid: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <span
+      className={cn(
+        "relative mt-3 flex min-h-14 min-w-0 items-center border bg-[var(--background)] px-4 pr-12 transition-colors duration-150 focus-within:border-[var(--accent-strong)] focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-[var(--accent)] hover:border-[var(--muted)]",
+        invalid && "border-red-700 dark:border-red-400",
+      )}
+    >
+      <span
+        aria-hidden="true"
+        className="truncate text-base font-medium tabular-nums"
+      >
+        {formatStayDate(value)}
+      </span>
+      <CalendarDays
+        aria-hidden="true"
+        className="pointer-events-none absolute right-4"
+        size={20}
+        strokeWidth={1.75}
+      />
+      {children}
+    </span>
+  );
+}
+
+function SummaryItem({
+  label,
+  value,
+  className,
+}: {
+  label: string;
+  value: string;
+  className?: string;
+}) {
+  return (
+    <div className={cn("border-b py-5 sm:border-b-0", className)}>
+      <p className="annotation text-[var(--muted)]">{label}</p>
+      <p className="mt-2 text-sm leading-6 font-medium">{value}</p>
+    </div>
   );
 }

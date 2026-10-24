@@ -190,7 +190,7 @@ test("gallery supports keyboard navigation and escape", async ({ page }) => {
 
 test("booking form exposes validation errors", async ({ page }) => {
   await page.goto("/book");
-  await page.getByRole("button", { name: "Request booking" }).click();
+  await page.getByRole("button", { name: "Send reservation request" }).click();
   await expect(page.getByText("Enter your full name")).toBeVisible();
   await expect(
     page.getByRole("alert").filter({ hasText: "Select an apartment" }),

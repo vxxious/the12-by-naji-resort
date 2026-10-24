@@ -6,13 +6,7 @@ import { useState } from "react";
 
 import { rooms } from "@/data/rooms";
 import { startRouteTransition } from "@/lib/navigation/route-transition";
-
-function formatDisplayDate(value: string) {
-  if (!value) return "Select date";
-
-  const [year, month, day] = value.split("-");
-  return year && month && day ? `${day}/${month}/${year}` : value;
-}
+import { formatStayDate } from "@/lib/booking/schema";
 
 export function StayPlanner() {
   const router = useRouter();
@@ -48,7 +42,7 @@ export function StayPlanner() {
             aria-hidden="true"
             className="truncate text-lg font-medium tabular-nums"
           >
-            {formatDisplayDate(checkIn)}
+            {formatStayDate(checkIn)}
           </span>
           <CalendarDays
             aria-hidden="true"
@@ -78,7 +72,7 @@ export function StayPlanner() {
             aria-hidden="true"
             className="truncate text-lg font-medium tabular-nums"
           >
-            {formatDisplayDate(checkOut)}
+            {formatStayDate(checkOut)}
           </span>
           <CalendarDays
             aria-hidden="true"

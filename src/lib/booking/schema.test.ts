@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   bookingRequestSchema,
   calculateLengthOfStay,
+  formatStayDate,
 } from "@/lib/booking/schema";
 
 function futureDate(offset: number) {
@@ -14,6 +15,11 @@ function futureDate(offset: number) {
 describe("booking request validation", () => {
   it("calculates the stay from the selected dates", () => {
     expect(calculateLengthOfStay("2030-01-10", "2030-01-13")).toBe(3);
+  });
+
+  it("formats a selected date for the booking interface", () => {
+    expect(formatStayDate("2030-01-10")).toBe("10/01/2030");
+    expect(formatStayDate()).toBe("Select date");
   });
 
   it("rejects checkout on or before check-in", () => {

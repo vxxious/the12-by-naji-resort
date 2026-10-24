@@ -55,3 +55,10 @@ export function calculateLengthOfStay(checkIn?: string, checkOut?: string) {
     return 0;
   return Math.round((end - start) / 86_400_000);
 }
+
+export function formatStayDate(value?: string) {
+  if (!value) return "Select date";
+
+  const [year, month, day] = value.split("-");
+  return year && month && day ? `${day}/${month}/${year}` : value;
+}
