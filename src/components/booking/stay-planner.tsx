@@ -1,11 +1,18 @@
 "use client";
 
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, CalendarDays, ChevronDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { rooms } from "@/data/rooms";
 import { startRouteTransition } from "@/lib/navigation/route-transition";
+
+function formatDisplayDate(value: string) {
+  if (!value) return "Select date";
+
+  const [year, month, day] = value.split("-");
+  return year && month && day ? `${day}/${month}/${year}` : value;
+}
 
 export function StayPlanner() {
   const router = useRouter();
@@ -29,46 +36,74 @@ export function StayPlanner() {
   return (
     <form
       onSubmit={continueToBooking}
-      className="grid gap-5 border bg-[var(--surface)] p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-[1fr_1fr_1.25fr_auto] lg:items-end lg:gap-4"
+      className="grid min-w-0 gap-5 border bg-[var(--surface)] p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-[1fr_1fr_1.25fr_auto] lg:items-end lg:gap-4"
       aria-label="Start a booking request"
     >
-      <label className="group grid cursor-pointer gap-3">
+      <label className="group grid min-w-0 cursor-pointer gap-3">
         <span className="annotation text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]">
           Check in
         </span>
-        <input
-          type="date"
-          name="checkIn"
-          min={new Date().toISOString().slice(0, 10)}
-          onChange={(event) => {
-            const value = event.target.value;
-            setCheckIn(value);
-            if (checkOut && checkOut <= value) setCheckOut("");
-          }}
-          className="min-h-16 w-full cursor-pointer border bg-[var(--background)] px-4 text-lg font-medium transition-[border-color,background-color] duration-150 hover:border-[var(--foreground)] focus:border-[var(--accent-strong)] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
-        />
+        <span className="relative flex min-h-16 min-w-0 items-center border bg-[var(--background)] px-4 pr-12 transition-[border-color,background-color] duration-150 group-hover:border-[var(--foreground)] focus-within:border-[var(--accent-strong)] focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-[var(--accent)]">
+          <span
+            aria-hidden="true"
+            className="truncate text-lg font-medium tabular-nums"
+          >
+            {formatDisplayDate(checkIn)}
+          </span>
+          <CalendarDays
+            aria-hidden="true"
+            className="pointer-events-none absolute right-4 text-[var(--foreground)]"
+            size={21}
+            strokeWidth={1.75}
+          />
+          <input
+            type="date"
+            name="checkIn"
+            min={new Date().toISOString().slice(0, 10)}
+            onChange={(event) => {
+              const value = event.target.value;
+              setCheckIn(value);
+              if (checkOut && checkOut <= value) setCheckOut("");
+            }}
+            className="absolute inset-0 z-10 h-full w-full min-w-0 cursor-pointer opacity-0"
+          />
+        </span>
       </label>
-      <label className="group grid cursor-pointer gap-3">
+      <label className="group grid min-w-0 cursor-pointer gap-3">
         <span className="annotation text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]">
           Check out
         </span>
-        <input
-          type="date"
-          name="checkOut"
-          value={checkOut}
-          min={checkIn || new Date().toISOString().slice(0, 10)}
-          onChange={(event) => setCheckOut(event.target.value)}
-          className="min-h-16 w-full cursor-pointer border bg-[var(--background)] px-4 text-lg font-medium transition-[border-color,background-color] duration-150 hover:border-[var(--foreground)] focus:border-[var(--accent-strong)] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
-        />
+        <span className="relative flex min-h-16 min-w-0 items-center border bg-[var(--background)] px-4 pr-12 transition-[border-color,background-color] duration-150 group-hover:border-[var(--foreground)] focus-within:border-[var(--accent-strong)] focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-[var(--accent)]">
+          <span
+            aria-hidden="true"
+            className="truncate text-lg font-medium tabular-nums"
+          >
+            {formatDisplayDate(checkOut)}
+          </span>
+          <CalendarDays
+            aria-hidden="true"
+            className="pointer-events-none absolute right-4 text-[var(--foreground)]"
+            size={21}
+            strokeWidth={1.75}
+          />
+          <input
+            type="date"
+            name="checkOut"
+            value={checkOut}
+            min={checkIn || new Date().toISOString().slice(0, 10)}
+            onChange={(event) => setCheckOut(event.target.value)}
+            className="absolute inset-0 z-10 h-full w-full min-w-0 cursor-pointer opacity-0"
+          />
+        </span>
       </label>
-      <label className="group grid cursor-pointer gap-3 sm:col-span-2 lg:col-span-1">
+      <label className="group grid min-w-0 cursor-pointer gap-3 sm:col-span-2 lg:col-span-1">
         <span className="annotation text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]">
           Apartment
         </span>
-        <span className="relative block">
+        <span className="relative block min-w-0">
           <select
             name="room"
-            className="min-h-16 w-full cursor-pointer appearance-none border bg-[var(--background)] px-4 pr-12 text-lg font-medium transition-[border-color,background-color] duration-150 hover:border-[var(--foreground)] focus:border-[var(--accent-strong)]"
+            className="min-h-16 w-full min-w-0 cursor-pointer appearance-none border bg-[var(--background)] px-4 pr-12 text-lg font-medium transition-[border-color,background-color] duration-150 hover:border-[var(--foreground)] focus:border-[var(--accent-strong)]"
           >
             <option value="">Any apartment</option>
             {rooms.map((option) => (

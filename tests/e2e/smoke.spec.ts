@@ -36,6 +36,17 @@ test("stay planner sends selected criteria to the booking page", async ({
   const planner = page.getByRole("form", { name: "Start a booking request" });
   const checkIn = planner.getByLabel("Check in");
   const checkOut = planner.getByLabel("Check out");
+  const fieldsFitPlanner = await planner.evaluate((form) => {
+    const formBounds = form.getBoundingClientRect();
+    return Array.from(form.querySelectorAll("input, select")).every((field) => {
+      const fieldBounds = field.getBoundingClientRect();
+      return (
+        fieldBounds.left >= formBounds.left &&
+        fieldBounds.right <= formBounds.right
+      );
+    });
+  });
+  expect(fieldsFitPlanner).toBe(true);
   await checkIn.fill("2027-01-10");
   await expect(checkIn).toHaveValue("2027-01-10");
   await checkOut.fill("2027-01-13");
