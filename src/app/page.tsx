@@ -15,9 +15,11 @@ export default function HomePage() {
             Utako · Abuja
           </p>
 
-          <h1 className="display-title relative z-10 mt-5 text-[clamp(3.3rem,7vw,7.25rem)] md:absolute md:top-[17%] md:left-0 md:mt-0">
-            Redefining
-            <span className="block text-[var(--accent-strong)]">
+          <h1 className="display-title relative z-10 mt-5 font-[550] md:absolute md:top-[18%] md:left-0 md:mt-0">
+            <span className="block w-fit bg-[var(--background)] pr-[0.12em]">
+              Redefining
+            </span>
+            <span className="block w-fit bg-[var(--background)] pr-[0.12em] text-[var(--accent-strong)]">
               resort living.
             </span>
           </h1>
@@ -36,11 +38,13 @@ export default function HomePage() {
           <div className="mt-5 grid grid-cols-2 gap-5 border-t pt-4 md:absolute md:top-2 md:right-0 md:mt-0 md:w-[11%] md:grid-cols-1 md:border-t-0 md:border-l md:pt-0 md:pl-5">
             <div>
               <p className="annotation text-[var(--muted)]">Property</p>
-              <p className="mt-2 text-xs leading-5">Apartment resort</p>
+              <p className="mt-2 text-base leading-6 font-medium">
+                Apartment resort
+              </p>
             </div>
             <div className="md:mt-7">
               <p className="annotation text-[var(--muted)]">Address</p>
-              <p className="mt-2 text-xs leading-5">
+              <p className="mt-2 text-base leading-6 font-medium">
                 Home Trust Estate
                 <br /> Utako, Abuja
               </p>
@@ -73,7 +77,7 @@ export default function HomePage() {
             <h2 className="section-title text-balance">
               The privacy of an apartment. The rhythm of a resort.
             </h2>
-            <p className="mt-10 max-w-2xl border-t pt-7 text-sm leading-7 text-[var(--muted)] md:text-base">
+            <p className="mt-10 max-w-2xl border-t pt-7 text-base leading-8 font-medium text-[var(--muted)]">
               The 12 brings furnished apartments and shared resort amenities
               together in Utako, Abuja. Choose the stay that suits you, then
               send a reservation request directly to the resort.
@@ -100,7 +104,7 @@ export default function HomePage() {
             <h2 className="mt-5 text-4xl leading-[0.98] tracking-[-0.04em] md:text-6xl">
               Find the space that fits your stay.
             </h2>
-            <p className="mt-7 text-sm leading-7 text-[var(--muted)]">
+            <p className="mt-7 text-base leading-8 font-medium text-[var(--muted)]">
               Browse the Elysian and Oasis collections, compare their published
               details and open a dedicated page for each apartment.
             </p>

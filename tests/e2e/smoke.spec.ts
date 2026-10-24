@@ -29,6 +29,24 @@ test("room booking action preselects the apartment", async ({ page }) => {
   await expect(page.getByLabel("Apartment")).toHaveValue("santorini");
 });
 
+test("stay planner sends selected criteria to the booking page", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const planner = page.getByRole("form", { name: "Start a booking request" });
+  const checkIn = planner.getByLabel("Check in");
+  const checkOut = planner.getByLabel("Check out");
+  await checkIn.fill("2027-01-10");
+  await expect(checkIn).toHaveValue("2027-01-10");
+  await checkOut.fill("2027-01-13");
+  await expect(checkOut).toHaveValue("2027-01-13");
+  await planner.getByLabel("Apartment").selectOption("santorini");
+  await planner.getByRole("button", { name: "Plan your stay" }).click();
+  await expect(page).toHaveURL(
+    /\/book\?checkIn=2027-01-10&checkOut=2027-01-13&room=santorini$/,
+  );
+});
+
 test("footer exposes every verified social channel", async ({ page }) => {
   await page.goto("/");
   const expectedLinks = {

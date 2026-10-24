@@ -17,7 +17,7 @@ colors:
 typography:
   display:
     fontFamily: "Manrope, sans-serif"
-    fontSize: "clamp(3.25rem, 8vw, 8.5rem)"
+    fontSize: "clamp(3.25rem, 6.5vw, 6rem)"
     fontWeight: 500
     lineHeight: 0.88
     letterSpacing: "-0.04em"
@@ -30,7 +30,7 @@ typography:
   body:
     fontFamily: "Manrope, sans-serif"
     fontSize: "1rem"
-    fontWeight: 400
+    fontWeight: 450
     lineHeight: 1.75
   label:
     fontFamily: "Azeret Mono, monospace"
