@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f2f1ed;
+  --surface: #ffffff;
+  --surface-muted: #e9e7e1;
+  --foreground: #121212;
+  --muted: #68655f;
+  --border: #d6d2ca;
+  --accent: #b78b3e;
+  --accent-strong: #76531e;
+  --accent-contrast: #121212;
+  --header: rgba(242, 241, 237, 0.93);
+  --selection: #d9bd84;
+}
+
+.dark {
+  --background: #121212;
+  --surface: #1a1a19;
+  --surface-muted: #222220;
+  --foreground: #f2f1ed;
+  --muted: #aaa69d;
+  --border: #35332f;
+  --accent: #c59a4b;
+  --accent-strong: #ddba74;
+  --accent-contrast: #121212;
+  --header: rgba(18, 18, 18, 0.93);
+  --selection: #72582e;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-manrope), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--selection);
+  color: var(--foreground);
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  outline-offset: 4px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+}
+
+input,
+select,
+textarea {
+  color-scheme: light;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  color-scheme: dark;
+}
+
+.annotation {
+  font-family: var(--font-azaret), monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.display-title {
+  font-size: clamp(3.25rem, 8vw, 8.5rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+}
+
+.section-title {
+  font-size: clamp(2.4rem, 5vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.94;
+}
+
+.page-shell {
+  margin-inline: auto;
+  width: min(100% - 2rem, 96rem);
+}
+
+@media (min-width: 768px) {
+  .page-shell {
+    width: min(100% - 4rem, 96rem);
+  }
+}
+
+.image-plate {
+  overflow: hidden;
+  background: var(--surface-muted);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

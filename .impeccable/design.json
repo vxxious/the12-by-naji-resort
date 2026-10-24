@@ -1,0 +1,346 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-24T01:40:00Z",
+  "title": "Design System: The 12 by Naji Resort",
+  "extensions": {
+    "colorMeta": {
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk Ground",
+        "canonical": "#f2f1ed",
+        "tonalRamp": [
+          "#25241f",
+          "#45433b",
+          "#66635a",
+          "#89867c",
+          "#aaa79f",
+          "#cbc9c3",
+          "#e3e1dc",
+          "#f7f6f3"
+        ]
+      },
+      "paper-white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#262626",
+          "#474747",
+          "#686868",
+          "#898989",
+          "#aaaaaa",
+          "#cbcbcb",
+          "#e5e5e5",
+          "#ffffff"
+        ]
+      },
+      "carbon": {
+        "role": "neutral",
+        "displayName": "Carbon",
+        "canonical": "#121212",
+        "tonalRamp": [
+          "#121212",
+          "#303030",
+          "#505050",
+          "#707070",
+          "#929292",
+          "#b5b5b5",
+          "#d9d9d9",
+          "#f3f3f3"
+        ]
+      },
+      "muted-stone": {
+        "role": "neutral",
+        "displayName": "Muted Stone",
+        "canonical": "#68655f",
+        "tonalRamp": [
+          "#25231f",
+          "#45423d",
+          "#68655f",
+          "#85827c",
+          "#a4a19b",
+          "#c3c0ba",
+          "#dfddd8",
+          "#f5f3ef"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline Concrete",
+        "canonical": "#d6d2ca",
+        "tonalRamp": [
+          "#272520",
+          "#47443e",
+          "#68655d",
+          "#89857d",
+          "#aaa69d",
+          "#c9c5bd",
+          "#e1ddd6",
+          "#f6f3ed"
+        ]
+      },
+      "brass": {
+        "role": "primary",
+        "displayName": "Resort Brass",
+        "canonical": "#b78b3e",
+        "tonalRamp": [
+          "#30220c",
+          "#563b13",
+          "#78551d",
+          "#9b712b",
+          "#b78b3e",
+          "#cea65f",
+          "#e1c68e",
+          "#f4e8cd"
+        ]
+      },
+      "deep-brass": {
+        "role": "primary",
+        "displayName": "Deep Brass",
+        "canonical": "#76531e",
+        "tonalRamp": [
+          "#2c1e09",
+          "#4f350f",
+          "#76531e",
+          "#96702f",
+          "#b58d49",
+          "#d0ab6c",
+          "#e6ca9b",
+          "#f5e9d0"
+        ]
+      },
+      "night-surface": {
+        "role": "neutral",
+        "displayName": "Night Surface",
+        "canonical": "#1a1a19",
+        "tonalRamp": [
+          "#171716",
+          "#353533",
+          "#555552",
+          "#767672",
+          "#989893",
+          "#bbbbB5",
+          "#ddddD8",
+          "#f4f4ef"
+        ]
+      },
+      "night-muted": {
+        "role": "neutral",
+        "displayName": "Night Muted",
+        "canonical": "#aaa69d",
+        "tonalRamp": [
+          "#25231f",
+          "#46433d",
+          "#68645d",
+          "#89857d",
+          "#aaa69d",
+          "#c9c5bd",
+          "#e2ded7",
+          "#f6f3ed"
+        ]
+      },
+      "night-hairline": {
+        "role": "neutral",
+        "displayName": "Night Hairline",
+        "canonical": "#35332f",
+        "tonalRamp": [
+          "#22201d",
+          "#35332f",
+          "#56534e",
+          "#77736d",
+          "#98948d",
+          "#b9b5ae",
+          "#dad7d1",
+          "#f3f1ed"
+        ]
+      },
+      "night-brass": {
+        "role": "primary",
+        "displayName": "Night Brass",
+        "canonical": "#c59a4b",
+        "tonalRamp": [
+          "#31240e",
+          "#574016",
+          "#7d5d22",
+          "#a17a33",
+          "#c59a4b",
+          "#d7b46e",
+          "#e7ce9b",
+          "#f6e9cf"
+        ]
+      },
+      "night-brass-light": {
+        "role": "primary",
+        "displayName": "Night Brass Light",
+        "canonical": "#ddba74",
+        "tonalRamp": [
+          "#332711",
+          "#5b461d",
+          "#82662e",
+          "#aa8846",
+          "#c7a35d",
+          "#ddba74",
+          "#ead09b",
+          "#f7e9cf"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Short hero propositions only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Major page and section statements."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Readable hospitality descriptions and instructions."
+      },
+      "label": {
+        "displayName": "Factual Label",
+        "purpose": "Locations, categories, fields, rates, and states."
+      }
+    },
+    "shadows": [
+      {
+        "name": "flat-default",
+        "value": "none",
+        "purpose": "All ordinary surfaces and content plates."
+      },
+      {
+        "name": "mobile-dialog",
+        "value": "0 24px 64px rgba(0,0,0,0.24)",
+        "purpose": "The modal mobile navigation layer only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-transition",
+        "value": "200ms ease",
+        "purpose": "Color and small control-state changes."
+      },
+      {
+        "name": "image-drift",
+        "value": "700ms ease-out",
+        "purpose": "Subtle room-image scale on hover."
+      },
+      {
+        "name": "menu-enter",
+        "value": "360ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Mobile navigation entrance and exit."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single decisive brass action in a composition.",
+      "html": "<button class=\"ds-btn-primary\">BOOK NOW</button>",
+      "css": ".ds-btn-primary { min-height:48px; padding:0 20px; border:1px solid var(--accent, #b78b3e); border-radius:0; background:var(--accent, #b78b3e); color:var(--accent-contrast, #121212); font:600 11px/1 Manrope, sans-serif; letter-spacing:.12em; text-transform:uppercase; transition:background-color .2s,border-color .2s; } .ds-btn-primary:hover { background:var(--accent-strong, #76531e); border-color:var(--accent-strong, #76531e); } .ds-btn-primary:focus-visible { outline:2px solid var(--accent, #b78b3e); outline-offset:4px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "A square secondary action that inverts on hover.",
+      "html": "<button class=\"ds-btn-outline\">VIEW DETAILS</button>",
+      "css": ".ds-btn-outline { min-height:48px; padding:0 20px; border:1px solid var(--foreground, #121212); border-radius:0; background:transparent; color:var(--foreground, #121212); font:600 11px/1 Manrope, sans-serif; letter-spacing:.12em; text-transform:uppercase; transition:background-color .2s,color .2s; } .ds-btn-outline:hover { background:var(--foreground, #121212); color:var(--background, #f2f1ed); } .ds-btn-outline:focus-visible { outline:2px solid var(--accent, #b78b3e); outline-offset:4px; }"
+    },
+    {
+      "name": "Booking Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "A visible factual label and native control inside a connected planner.",
+      "html": "<label class=\"ds-field\"><span>CHECK IN</span><input type=\"date\"></label>",
+      "css": ".ds-field { display:grid; gap:8px; padding:16px 20px; border:1px solid var(--border, #d6d2ca); border-radius:0; background:var(--surface, #fff); color:var(--foreground, #121212); } .ds-field span { font:500 11px/1.4 'Azeret Mono', monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--muted, #68655f); } .ds-field input { border:0; outline:0; background:transparent; color:inherit; font:400 14px/1.5 Manrope, sans-serif; } .ds-field:focus-within { outline:2px solid var(--accent, #b78b3e); outline-offset:2px; }"
+    },
+    {
+      "name": "Primary Navigation",
+      "kind": "nav",
+      "description": "Quiet uppercase navigation with one active hairline.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-active\" href=\"#\">HOME</a><a href=\"#\">ROOMS</a><a href=\"#\">GALLERY</a></nav>",
+      "css": ".ds-nav { display:flex; align-items:center; gap:28px; min-height:80px; border-bottom:1px solid var(--border, #d6d2ca); background:var(--background, #f2f1ed); } .ds-nav a { padding:8px 0; color:var(--foreground, #121212); text-decoration:none; font:500 11px/1.4 'Azeret Mono', monospace; letter-spacing:.1em; } .ds-nav a:hover { color:var(--accent-strong, #76531e); } .ds-nav-active { border-bottom:1px solid var(--accent, #b78b3e); } .ds-nav a:focus-visible { outline:2px solid var(--accent, #b78b3e); outline-offset:4px; }"
+    },
+    {
+      "name": "Stay Planner",
+      "kind": "custom",
+      "description": "A connected architectural row of stay criteria and one brass action.",
+      "html": "<form class=\"ds-planner\"><label>CHECK IN<input type=\"date\"></label><label>APARTMENT<select><option>Any apartment</option></select></label><button>PLAN YOUR STAY</button></form>",
+      "css": ".ds-planner { display:grid; grid-template-columns:1fr 1.25fr auto; border:1px solid var(--border, #d6d2ca); background:var(--surface, #fff); } .ds-planner label { display:grid; gap:8px; padding:20px; border-right:1px solid var(--border, #d6d2ca); color:var(--muted, #68655f); font:500 11px/1.4 'Azeret Mono', monospace; letter-spacing:.12em; } .ds-planner input,.ds-planner select { border:0; background:transparent; color:var(--foreground, #121212); font:400 14px/1.5 Manrope, sans-serif; } .ds-planner button { min-width:192px; border:0; border-radius:0; background:var(--accent, #b78b3e); color:#121212; font:600 11px/1 Manrope, sans-serif; letter-spacing:.11em; } .ds-planner button:hover { background:var(--accent-strong, #76531e); } .ds-planner :focus-visible { outline:2px solid var(--accent, #b78b3e); outline-offset:3px; }"
+    },
+    {
+      "name": "Room Row",
+      "kind": "card",
+      "description": "An open editorial room presentation separated by hairlines rather than a card shell.",
+      "html": "<article class=\"ds-room\"><div class=\"ds-room-image\"></div><div><small>ELYSIAN · 3 BEDROOM</small><h3>Bora-Bora</h3><p>Apartment details and verified amenities.</p><strong>PUBLISHED RATE</strong></div></article>",
+      "css": ".ds-room { display:grid; grid-template-columns:7fr 5fr; gap:32px; padding:48px 0; border-top:1px solid var(--border, #d6d2ca); background:transparent; color:var(--foreground, #121212); } .ds-room-image { aspect-ratio:16/10; background:var(--surface-muted, #e9e7e1); } .ds-room small,.ds-room strong { font:500 11px/1.4 'Azeret Mono', monospace; letter-spacing:.12em; color:var(--muted, #68655f); } .ds-room h3 { margin:12px 0 0; font:500 48px/.94 Manrope, sans-serif; letter-spacing:-.04em; } .ds-room p { max-width:28rem; color:var(--muted, #68655f); font:400 14px/1.75 Manrope, sans-serif; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Measured Resort",
+    "overview": "The visual system treats the property as the identity. Large, truthful photographs sit inside a measured field of chalk, carbon, hairline rules, and restrained brass. The atmosphere is calm and exact rather than ornamental: architectural scale and whitespace communicate luxury while the content remains direct and hospitable.\n\nThe system is editorial but not magazine-like for its own sake. Display type establishes place and proposition; compact mono text is reserved for factual metadata, rates, locations, and state. Interfaces stay square, low-shadow, and visibly structured. Dark mode preserves the same hierarchy instead of becoming a separate visual language.",
+    "keyCharacteristics": [
+      "Real property photography at architectural scale",
+      "Twelve-column desktop composition with disciplined mobile reduction",
+      "Warm neutral grounds, carbon type, and one restrained brass accent",
+      "Square controls, one-pixel rules, generous whitespace, and minimal depth",
+      "Factual hospitality language with explicit booking states"
+    ],
+    "rules": [
+      {
+        "name": "The Brass Economy Rule",
+        "body": "Brass identifies the primary action or a small factual accent; it does not spread across backgrounds, decoration, and body copy at once.",
+        "section": "colors"
+      },
+      {
+        "name": "The Theme Equivalence Rule",
+        "body": "Light and dark modes preserve semantic hierarchy, contrast, and photographic prominence rather than swapping to a new aesthetic.",
+        "section": "colors"
+      },
+      {
+        "name": "The Factual Mono Rule",
+        "body": "Mono labels must communicate a location, state, category, field, or measurable fact; they are not generic pre-heading eyebrows.",
+        "section": "typography"
+      },
+      {
+        "name": "The Display Restraint Rule",
+        "body": "Use one display-scale statement per view and keep tracking no tighter than the established display setting.",
+        "section": "typography"
+      },
+      {
+        "name": "The Aligned Edge Rule",
+        "body": "Prefer shared baselines, hairlines, and grid edges over extra containers or decorative separators.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "If a border, tonal shift, or image plane communicates hierarchy, do not add a shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do let verified property photography and generous whitespace carry the premium character.",
+      "Do use brass sparingly for a primary action or factual emphasis.",
+      "Do keep metadata concise, uppercase, and genuinely informative.",
+      "Do preserve square geometry, one-pixel rules, and strong alignment across themes and breakpoints.",
+      "Do qualify rates, availability, and booking state exactly as the underlying workflow supports."
+    ],
+    "donts": [
+      "Don't introduce gradients, glassmorphism, pill-heavy controls, or routine card shadows.",
+      "Don't use mono labels as decorative eyebrow copy above every heading.",
+      "Don't invent hotel facts, availability, reviews, awards, or event schedules.",
+      "Don't animate every element or hide essential content before JavaScript or scroll triggers run.",
+      "Don't substitute generic stock imagery for verified resort photography."
+    ]
+  }
+}

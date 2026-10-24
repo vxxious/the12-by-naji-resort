@@ -1,0 +1,32 @@
+# dependencies
+/node_modules
+
+# Next.js
+/.next
+/out
+*.tsbuildinfo
+
+# production
+/build
+
+# local environment files
+.env*
+!.env.example
+
+# tests and tooling
+/coverage
+/playwright-report
+/test-results
+
+# deployment
+.vercel
+
+# editor and OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Impeccable runtime state and research captures
+.impeccable/questions/
+.impeccable/research/raw/
+.impeccable/review/
