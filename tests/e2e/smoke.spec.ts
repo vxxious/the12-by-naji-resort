@@ -48,6 +48,16 @@ test("footer exposes every verified social channel", async ({ page }) => {
   }
 });
 
+test("contact page uses the branded WhatsApp action", async ({ page }) => {
+  await page.goto("/contact");
+  const whatsapp = page.getByRole("link", {
+    name: "Message The 12 by Naji Resort on WhatsApp",
+  });
+  await expect(whatsapp).toHaveAttribute("href", "https://wa.me/2349018289732");
+  await expect(whatsapp.locator("svg").first()).toBeVisible();
+  await expect(whatsapp).toContainText("Message the resort");
+});
+
 test("gallery supports keyboard navigation and escape", async ({ page }) => {
   await page.goto("/gallery");
   await page.getByRole("button", { name: /Open image 1 of 30/ }).click();

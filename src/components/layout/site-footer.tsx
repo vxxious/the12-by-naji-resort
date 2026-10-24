@@ -6,8 +6,8 @@ import { hotel, navItems } from "@/data/hotel";
 export function SiteFooter() {
   return (
     <footer className="border-t bg-[var(--surface)]">
-      <div className="page-shell grid gap-12 py-16 md:grid-cols-12 md:py-24">
-        <div className="md:col-span-5">
+      <div className="page-shell grid gap-12 py-16 md:py-24 lg:grid-cols-12">
+        <div className="lg:col-span-4">
           <p className="annotation text-[var(--accent-strong)]">
             The 12 by Naji
           </p>
@@ -15,7 +15,7 @@ export function SiteFooter() {
             Residential privacy. Resort privileges.
           </p>
         </div>
-        <div className="grid gap-10 sm:grid-cols-2 md:col-span-7 md:grid-cols-3">
+        <div className="grid gap-10 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-[0.75fr_1.1fr_1.25fr] lg:gap-8">
           <div>
             <p className="annotation text-[var(--muted)]">Navigate</p>
             <ul className="mt-5 space-y-3 text-sm">

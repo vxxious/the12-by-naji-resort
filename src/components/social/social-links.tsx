@@ -2,6 +2,7 @@ import {
   SocialIcon,
   type SocialIconName,
 } from "@/components/icons/social-icons";
+import { ArrowUpRight } from "lucide-react";
 import { hotel } from "@/data/hotel";
 import { cn } from "@/lib/utils";
 
@@ -44,7 +45,47 @@ const socialLinks: Array<{
   },
 ];
 
-export function SocialLinks({ className }: { className?: string }) {
+export function SocialLinks({
+  className,
+  variant = "icons",
+}: {
+  className?: string;
+  variant?: "icons" | "list";
+}) {
+  if (variant === "list") {
+    return (
+      <nav
+        aria-label="Social media"
+        className={cn("grid gap-x-6 sm:grid-cols-2", className)}
+      >
+        {socialLinks.map((social) => (
+          <a
+            key={social.name}
+            className={cn(
+              "group flex min-h-14 items-center justify-between gap-4 border-t py-3 text-sm transition-colors duration-150",
+              social.hoverClassName,
+            )}
+            href={social.href}
+            aria-label={`Visit The 12 by Naji Resort on ${social.label}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="flex items-center gap-3">
+              <SocialIcon name={social.name} className="size-5 shrink-0" />
+              {social.label}
+            </span>
+            <ArrowUpRight
+              aria-hidden="true"
+              className="shrink-0"
+              size={16}
+              strokeWidth={1.5}
+            />
+          </a>
+        ))}
+      </nav>
+    );
+  }
+
   return (
     <div className={cn("flex flex-wrap gap-1", className)}>
       {socialLinks.map((social) => (
