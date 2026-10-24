@@ -11,6 +11,7 @@ const socialLinks: Array<{
   label: string;
   href: string;
   hoverClassName: string;
+  iconClassName?: string;
 }> = [
   {
     name: "instagram",
@@ -42,6 +43,7 @@ const socialLinks: Array<{
     label: "WhatsApp",
     href: hotel.social.whatsapp,
     hoverClassName: "hover:border-[#168b4f] hover:text-[#168b4f]",
+    iconClassName: "text-[#25d366]",
   },
 ];
 
@@ -71,7 +73,10 @@ export function SocialLinks({
             rel="noreferrer"
           >
             <span className="flex items-center gap-3">
-              <SocialIcon name={social.name} className="size-5 shrink-0" />
+              <SocialIcon
+                name={social.name}
+                className={cn("size-5 shrink-0", social.iconClassName)}
+              />
               {social.label}
             </span>
             <ArrowUpRight
@@ -101,7 +106,10 @@ export function SocialLinks({
           target="_blank"
           rel="noreferrer"
         >
-          <SocialIcon name={social.name} className="size-5" />
+          <SocialIcon
+            name={social.name}
+            className={cn("size-5", social.iconClassName)}
+          />
         </a>
       ))}
     </div>

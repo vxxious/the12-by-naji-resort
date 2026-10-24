@@ -88,7 +88,10 @@ export default function ContactPage() {
                         <Mail aria-hidden="true" size={20} strokeWidth={1.6} />
                       )}
                       {item.icon === "whatsapp" && (
-                        <SocialIcon name="whatsapp" className="size-5.5" />
+                        <SocialIcon
+                          name="whatsapp"
+                          className="size-6 text-[#25d366]"
+                        />
                       )}
                     </span>
                     <span className="min-w-0 flex-1">

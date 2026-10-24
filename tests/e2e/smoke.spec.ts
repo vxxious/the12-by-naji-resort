@@ -54,7 +54,7 @@ test("contact page uses the branded WhatsApp action", async ({ page }) => {
     name: "Message The 12 by Naji Resort on WhatsApp",
   });
   await expect(whatsapp).toHaveAttribute("href", "https://wa.me/2349018289732");
-  await expect(whatsapp.locator("svg").first()).toBeVisible();
+  await expect(whatsapp.locator('[data-social-icon="whatsapp"]')).toBeVisible();
   await expect(whatsapp).toContainText("Message the resort");
 });
 
