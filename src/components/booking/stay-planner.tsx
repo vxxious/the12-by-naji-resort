@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { rooms } from "@/data/rooms";
+import { startRouteTransition } from "@/lib/navigation/route-transition";
 
 export function StayPlanner() {
   const router = useRouter();
@@ -18,6 +19,7 @@ export function StayPlanner() {
     if (checkIn) params.set("checkIn", checkIn);
     if (checkOut) params.set("checkOut", checkOut);
     if (room) params.set("room", room);
+    startRouteTransition();
     router.push(`/book${params.size ? `?${params.toString()}` : ""}`);
   }
 

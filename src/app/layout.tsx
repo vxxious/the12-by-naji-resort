@@ -3,6 +3,7 @@ import { Azeret_Mono, Manrope } from "next/font/google";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { RouteTransitionIndicator } from "@/components/navigation/route-transition-indicator";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { hotel } from "@/data/hotel";
 
@@ -106,6 +107,7 @@ export default function RootLayout({
           >
             Skip to content
           </a>
+          <RouteTransitionIndicator />
           <SiteHeader />
           <main id="main-content">{children}</main>
           <SiteFooter />

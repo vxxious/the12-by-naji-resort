@@ -14,6 +14,7 @@
   --accent-contrast: #121212;
   --header: rgba(242, 241, 237, 0.93);
   --selection: #d9bd84;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .dark {
@@ -131,8 +132,30 @@ textarea {
 }
 
 .route-spinner {
-  animation: route-spin 1s linear infinite;
+  animation: route-spin 800ms linear infinite;
   will-change: transform;
+}
+
+.route-transition-indicator {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  background: var(--background);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 180ms var(--ease-out),
+    visibility 0s linear 180ms;
+}
+
+.route-transition-indicator[data-active="true"] {
+  opacity: 0.96;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 180ms var(--ease-out);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -152,5 +175,9 @@ textarea {
   .route-spinner {
     animation: route-pulse 1s cubic-bezier(0.23, 1, 0.32, 1) infinite !important;
     transform: none !important;
+  }
+
+  .route-transition-indicator {
+    transition-duration: 0.01ms !important;
   }
 }

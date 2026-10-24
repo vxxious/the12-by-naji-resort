@@ -88,6 +88,28 @@ test("navigation routes to every dedicated content page", async ({
   }
 });
 
+test("route navigation exposes a loading state", async ({ page, isMobile }) => {
+  await page.goto("/");
+
+  if (isMobile) {
+    await page.getByRole("button", { name: "Open navigation" }).click();
+    await page
+      .getByRole("navigation", { name: "Mobile" })
+      .getByRole("link", { name: "Tours", exact: true })
+      .click();
+  } else {
+    await page
+      .getByRole("navigation", { name: "Primary" })
+      .getByRole("link", { name: "Tours", exact: true })
+      .click();
+  }
+
+  const indicator = page.getByTestId("route-transition-indicator");
+  await expect(indicator).toHaveAttribute("data-active", "true");
+  await expect(page).toHaveURL(/\/tours$/);
+  await expect(indicator).toHaveAttribute("data-active", "false");
+});
+
 test("contact page uses the branded WhatsApp action", async ({ page }) => {
   await page.goto("/contact");
   const whatsapp = page.getByRole("link", {
