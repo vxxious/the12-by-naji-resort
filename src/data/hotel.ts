@@ -40,21 +40,61 @@ export const amenities = [
 export const facilities = [
   {
     title: "Multipurpose court",
-    description: "Basketball, volleyball and table tennis facilities.",
-    image: "/images/amenities/property-aerial.jpg",
+    description:
+      "A multipurpose playing court for basketball, volleyball and table tennis.",
+    images: ["/images/amenities/amenity-feature-03.jpeg"],
   },
   {
     title: "Swimming pool",
     description:
       "A pool with adjoining seat-out and beach-like seat-out areas.",
-    image: "/images/amenities/amenity-feature-02.jpg",
+    images: [
+      "/images/amenities/amenity-feature-02.jpg",
+      "/images/amenities/pool-aerial.jpg",
+    ],
   },
   {
     title: "Mini zoo",
     description: "Monkeys, birds, fish and a landscaped mini pond.",
-    image: "/images/amenities/amenity-feature-01.jpeg",
+    images: [
+      "/images/amenities/amenity-feature-01.jpeg",
+      "/images/amenities/resort-aerial-01.jpg",
+    ],
   },
 ] as const;
+
+export const testimonials = [
+  {
+    name: "Aisha Bashir",
+    role: "Travel blogger",
+    quote:
+      "A relaxing and refreshing stay with a wonderful atmosphere, enjoyable activities and especially kind front-desk service.",
+  },
+  {
+    name: "Clinton Steve",
+    role: "Interior designer",
+    quote:
+      "A peaceful getaway with clean, comfortable rooms, friendly staff and time well spent relaxing by the pool.",
+  },
+  {
+    name: "Monica Sunday",
+    role: "Resort guest",
+    quote:
+      "A cosy environment with polished interiors, spacious rooms and plenty to experience, from the mini beach and zoo to the sports court.",
+  },
+] as const;
+
+export const sisterProperty = {
+  name: "The9 by Naji Apartments",
+  location: "Guzape, Abuja",
+  description:
+    "Furnished short-let apartments with a private pool, 24-hour power and water, Wi-Fi and on-site security.",
+  image: "/images/promotions/the9-by-naji-apartments.png",
+  phoneDisplay: "0912 600 7080",
+  whatsapp: "https://wa.me/2349126007080",
+  email: "the9abuja@gmail.com",
+  instagram: "https://www.instagram.com/the9_naji/",
+} as const;
 
 export const navItems = [
   { href: "/", label: "Home" },

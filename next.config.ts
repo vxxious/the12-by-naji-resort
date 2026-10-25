@@ -16,12 +16,12 @@ const nextConfig: NextConfig = {
       { source: "/book-now", destination: "/book", permanent: true },
       {
         source: "/elementor-page-720",
-        destination: "/rooms?block=elysian",
+        destination: "/rooms#elysian",
         permanent: true,
       },
       {
         source: "/oasis-block",
-        destination: "/rooms?block=oasis",
+        destination: "/rooms#oasis",
         permanent: true,
       },
       { source: "/homepage-2", destination: "/", permanent: true },
@@ -42,6 +42,16 @@ const nextConfig: NextConfig = {
       { source: "/elementor-1082", destination: "/book", permanent: true },
       { source: "/repair", destination: "/rooms", permanent: false },
       { source: "/hello-world", destination: "/", permanent: true },
+      {
+        source: "/category/uncategorized",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/author/kelvinoshomegie24gmail-com",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 };

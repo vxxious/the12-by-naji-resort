@@ -74,39 +74,40 @@ export default async function RoomPage({ params }: RoomPageProps) {
           </div>
         </div>
 
-        <div
-          className={`mt-12 grid gap-2 md:grid-cols-12 ${room.photographyPending ? "" : "md:grid-rows-2"}`}
-        >
-          <div
-            className={`image-plate relative aspect-[4/3] md:aspect-auto md:min-h-[44rem] ${room.photographyPending ? "md:col-span-12" : "md:col-span-8 md:row-span-2"}`}
-          >
-            <Image
-              src={room.images[0]}
-              alt={
-                room.photographyPending
-                  ? `${room.name} photography coming soon`
-                  : `${room.name} apartment main view`
-              }
-              fill
-              priority
-              sizes="(min-width: 768px) 66vw, 100vw"
-              className="object-cover"
-            />
-          </div>
-          {room.images.slice(1, 3).map((image, index) => (
+        <div className="mt-12 grid gap-2 md:grid-cols-12">
+          {room.images.map((image, index) => (
             <div
               key={image + index}
-              className="image-plate relative aspect-[4/3] md:col-span-4"
+              className={`image-plate relative aspect-[4/3] ${
+                room.photographyPending
+                  ? "md:col-span-12 md:aspect-[16/8]"
+                  : index === 0
+                    ? "md:col-span-8 md:aspect-[4/3]"
+                    : index === 1
+                      ? "md:col-span-4 md:aspect-[2/3]"
+                      : "md:col-span-6 md:aspect-[4/3]"
+              }`}
             >
               <Image
                 src={image}
                 alt={
                   room.photographyPending
-                    ? "Apartment photography coming soon"
-                    : `${room.name} apartment view ${index + 2}`
+                    ? `${room.name} photography coming soon`
+                    : index === 0
+                      ? `${room.name} apartment main view`
+                      : `${room.name} apartment view ${index + 1}`
                 }
                 fill
-                sizes="(min-width: 768px) 33vw, 100vw"
+                priority={index === 0}
+                sizes={
+                  room.photographyPending
+                    ? "100vw"
+                    : index === 0
+                      ? "(min-width: 768px) 66vw, 100vw"
+                      : index === 1
+                        ? "(min-width: 768px) 33vw, 100vw"
+                        : "(min-width: 768px) 50vw, 100vw"
+                }
                 className="object-cover"
               />
             </div>

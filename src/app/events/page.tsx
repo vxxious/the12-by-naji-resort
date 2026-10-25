@@ -52,10 +52,15 @@ export default function EventsPage() {
             <ol className="mt-5 divide-y border-y">
               {events.map((event, index) => (
                 <li
-                  key={event}
-                  className="flex items-center justify-between py-6"
+                  key={event.title}
+                  className="grid gap-3 py-6 sm:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)_auto] sm:items-start sm:gap-6"
                 >
-                  <span className="text-2xl tracking-[-0.04em]">{event}</span>
+                  <span className="text-2xl tracking-[-0.04em]">
+                    {event.title}
+                  </span>
+                  <span className="max-w-md text-sm leading-7 text-[var(--muted)]">
+                    {event.description}
+                  </span>
                   <span className="annotation text-[var(--muted)]">
                     {String(index + 1).padStart(2, "0")}
                   </span>

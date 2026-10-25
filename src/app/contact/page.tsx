@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ArrowUpRight, Clock3, Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
 
 import { SocialIcon } from "@/components/icons/social-icons";
 import { PageIntro } from "@/components/sections/page-intro";
@@ -53,6 +54,18 @@ export default function ContactPage() {
         image="/images/amenities/resort-exterior.jpg"
         imageAlt="Exterior of The 12 by Naji Resort"
       />
+      <div className="page-shell pb-12">
+        <Link
+          href="/events"
+          className="flex min-h-16 items-center justify-between gap-6 border-y py-4 text-sm font-medium transition-colors hover:text-[var(--accent-strong)]"
+        >
+          <span>Looking for resort events?</span>
+          <span className="annotation flex items-center gap-3">
+            View events
+            <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.5} />
+          </span>
+        </Link>
+      </div>
       <section className="border-y bg-[var(--surface)] py-16 md:py-24">
         <div className="page-shell grid gap-16 md:grid-cols-12 md:gap-10">
           <div className="md:col-span-6">

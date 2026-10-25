@@ -29,6 +29,22 @@ export function SiteFooter() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  className="hover:text-[var(--accent-strong)]"
+                  href="/facilities"
+                >
+                  Facilities
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="hover:text-[var(--accent-strong)]"
+                  href="/resort-policy"
+                >
+                  Resort Policy
+                </Link>
+              </li>
             </ul>
           </div>
           <div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { StayPlanner } from "@/components/booking/stay-planner";
 import { Reveal } from "@/components/motion/reveal";
 import { BookingCta } from "@/components/sections/booking-cta";
+import { sisterProperty, testimonials } from "@/data/hotel";
 
 export default function HomePage() {
   return (
@@ -82,6 +83,13 @@ export default function HomePage() {
               together in Utako, Abuja. Choose the stay that suits you, then ask
               the resort to confirm availability on WhatsApp.
             </p>
+            <Link
+              href="/facilities"
+              className="annotation mt-7 inline-flex min-h-11 items-center gap-3 border-b border-[var(--foreground)] transition-colors hover:border-[var(--accent-strong)] hover:text-[var(--accent-strong)]"
+            >
+              Explore the resort facilities
+              <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.5} />
+            </Link>
           </Reveal>
         </div>
       </section>
@@ -115,6 +123,83 @@ export default function HomePage() {
               Explore apartments
               <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.5} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y bg-[var(--surface)] py-20 md:py-28">
+        <div className="page-shell grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <h2 className="text-4xl tracking-[-0.04em] md:text-6xl">
+              In our guests&rsquo; words.
+            </h2>
+            <p className="mt-6 max-w-sm text-base leading-8 font-medium text-[var(--muted)]">
+              Feedback published on the existing resort website.
+            </p>
+          </div>
+          <div className="border-t md:col-span-7 md:col-start-6">
+            {testimonials.map((testimonial) => (
+              <figure
+                key={testimonial.name}
+                className="grid gap-7 border-b py-9 md:grid-cols-[1fr_auto] md:gap-12"
+              >
+                <blockquote className="max-w-2xl text-xl leading-9 font-medium tracking-[-0.02em] md:text-2xl md:leading-10">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </blockquote>
+                <figcaption className="md:w-40 md:text-right">
+                  <cite className="text-sm font-semibold not-italic">
+                    {testimonial.name}
+                  </cite>
+                  <p className="annotation mt-2 text-[var(--muted)]">
+                    {testimonial.role}
+                  </p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#100d0a] py-20 text-[#f4eee4] md:py-28">
+        <div className="page-shell grid gap-12 md:grid-cols-12 md:items-center">
+          <div className="relative aspect-square overflow-hidden border border-[#9d702d] md:col-span-7">
+            <Image
+              src={sisterProperty.image}
+              alt="The9 by Naji Apartments promotion showing the Guzape property, interiors, amenities and contact details"
+              fill
+              sizes="(min-width: 768px) 58vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="md:col-span-4 md:col-start-9">
+            <h2 className="text-4xl leading-[0.98] tracking-[-0.04em] md:text-6xl">
+              Another Naji stay in Abuja.
+            </h2>
+            <p className="mt-7 text-lg leading-8 font-medium text-[#c9c0b4]">
+              {sisterProperty.name} offers {sisterProperty.description}
+            </p>
+            <p className="annotation mt-8 text-[#d9a957]">
+              {sisterProperty.location} · {sisterProperty.phoneDisplay}
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+              <a
+                href={sisterProperty.whatsapp}
+                target="_blank"
+                rel="noreferrer"
+                className="annotation inline-flex min-h-12 items-center gap-3 border border-[#d9a957] bg-[#d9a957] px-5 text-[#100d0a] transition-colors hover:bg-[#e8bd70]"
+              >
+                Message The9
+                <ArrowUpRight aria-hidden="true" size={17} strokeWidth={1.5} />
+              </a>
+              <a
+                href={sisterProperty.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="annotation inline-flex min-h-11 items-center border-b border-[#8f8477] text-[#f4eee4] transition-colors hover:border-[#d9a957] hover:text-[#d9a957]"
+              >
+                Instagram @the9_naji
+              </a>
+            </div>
           </div>
         </div>
       </section>
