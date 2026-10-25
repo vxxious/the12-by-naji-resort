@@ -28,8 +28,8 @@ export default async function BookPage({ searchParams }: BookPageProps) {
   return (
     <>
       <section className="border-b bg-[var(--surface)]">
-        <div className="page-shell grid gap-10 py-10 md:grid-cols-12 md:items-center md:py-16 lg:gap-16 lg:py-20">
-          <div className="md:col-span-5">
+        <div className="page-shell grid gap-10 py-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:items-center md:py-16 lg:gap-16 lg:py-20">
+          <div className="min-w-0">
             <p className="annotation text-[var(--accent-strong)]">
               Room availability · Utako, Abuja
             </p>
@@ -54,7 +54,7 @@ export default async function BookPage({ searchParams }: BookPageProps) {
             </dl>
           </div>
 
-          <figure className="md:col-span-7">
+          <figure className="min-w-0">
             <div className="image-plate relative aspect-[4/3] overflow-hidden md:aspect-[16/11]">
               <Image
                 src="/images/hero/booking-hero.jpg"
@@ -73,8 +73,8 @@ export default async function BookPage({ searchParams }: BookPageProps) {
       </section>
 
       <section className="page-shell py-14 md:py-20 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-8">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-16">
+          <div className="min-w-0">
             <BookingForm
               initialRoom={params.room}
               initialCheckIn={params.checkIn}
@@ -82,7 +82,7 @@ export default async function BookPage({ searchParams }: BookPageProps) {
             />
           </div>
 
-          <aside className="lg:col-span-4" aria-label="Booking information">
+          <aside className="min-w-0" aria-label="Booking information">
             <div className="border bg-[var(--surface)] p-6 sm:p-8 lg:sticky lg:top-28">
               <h2 className="text-3xl leading-tight tracking-[-0.035em]">
                 What happens next.

@@ -45,7 +45,7 @@ export default function RoomsPage() {
             {collections.map((collection) => (
               <li key={collection.id}>
                 <a
-                  className="annotation hover:text-[var(--accent-strong)]"
+                  className="annotation inline-flex min-h-11 items-center hover:text-[var(--accent-strong)]"
                   href={`#${collection.id}`}
                 >
                   {collection.name}

@@ -11,13 +11,13 @@ const socialLinks: Array<{
   label: string;
   href: string;
   hoverClassName: string;
-  iconClassName?: string;
 }> = [
   {
     name: "instagram",
     label: "Instagram",
     href: hotel.social.instagram,
-    hoverClassName: "hover:border-[#e4405f] hover:text-[#e4405f]",
+    hoverClassName:
+      "hover:border-[#b72a4c] hover:bg-[#b72a4c] hover:text-white",
   },
   {
     name: "tiktok",
@@ -30,20 +30,22 @@ const socialLinks: Array<{
     name: "facebook",
     label: "Facebook",
     href: hotel.social.facebook,
-    hoverClassName: "hover:border-[#1877f2] hover:text-[#1877f2]",
+    hoverClassName:
+      "hover:border-[#0b57d0] hover:bg-[#0b57d0] hover:text-white",
   },
   {
     name: "youtube",
     label: "YouTube",
     href: hotel.social.youtube,
-    hoverClassName: "hover:border-[#ff0033] hover:text-[#ff0033]",
+    hoverClassName:
+      "hover:border-[#c50027] hover:bg-[#c50027] hover:text-white",
   },
   {
     name: "whatsapp",
     label: "WhatsApp",
     href: hotel.social.whatsapp,
-    hoverClassName: "hover:border-[#168b4f] hover:text-[#168b4f]",
-    iconClassName: "text-[#25d366]",
+    hoverClassName:
+      "hover:border-[#0f6f3f] hover:bg-[#0f6f3f] hover:text-white",
   },
 ];
 
@@ -73,10 +75,7 @@ export function SocialLinks({
             rel="noreferrer"
           >
             <span className="flex items-center gap-3">
-              <SocialIcon
-                name={social.name}
-                className={cn("size-5 shrink-0", social.iconClassName)}
-              />
+              <SocialIcon name={social.name} className="size-5 shrink-0" />
               {social.label}
             </span>
             <ArrowUpRight
@@ -106,10 +105,7 @@ export function SocialLinks({
           target="_blank"
           rel="noreferrer"
         >
-          <SocialIcon
-            name={social.name}
-            className={cn("size-5", social.iconClassName)}
-          />
+          <SocialIcon name={social.name} className="size-5" />
         </a>
       ))}
     </div>

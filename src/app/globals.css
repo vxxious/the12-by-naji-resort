@@ -12,6 +12,9 @@
   --accent: #b78b3e;
   --accent-strong: #76531e;
   --accent-contrast: #121212;
+  --accent-hover: #76531e;
+  --accent-hover-contrast: #ffffff;
+  --control-border: #86817a;
   --header: rgba(242, 241, 237, 0.93);
   --selection: #d9bd84;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -27,12 +30,19 @@
   --accent: #c59a4b;
   --accent-strong: #ddba74;
   --accent-contrast: #121212;
+  --accent-hover: #ddba74;
+  --accent-hover-contrast: #121212;
+  --control-border: #69655f;
   --header: rgba(18, 18, 18, 0.93);
   --selection: #72582e;
 }
 
 * {
   border-color: var(--border);
+}
+
+.control-boundary {
+  border-color: var(--control-border);
 }
 
 html {
@@ -45,6 +55,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-manrope), sans-serif;
   font-weight: 450;
+  overflow-wrap: anywhere;
   text-rendering: optimizeLegibility;
 }
 
@@ -91,6 +102,7 @@ textarea {
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 0.88;
+  overflow-wrap: anywhere;
 }
 
 .section-title {
@@ -98,6 +110,7 @@ textarea {
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 0.94;
+  overflow-wrap: anywhere;
 }
 
 .page-shell {

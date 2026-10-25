@@ -100,7 +100,7 @@ export function MobileMenu() {
             <Link
               href="/book"
               onClick={() => setOpen(false)}
-              className="flex min-h-14 items-center justify-between bg-[var(--accent)] px-5 text-sm font-semibold tracking-[0.1em] text-[var(--accent-contrast)] uppercase"
+              className="flex min-h-14 items-center justify-between bg-[var(--accent)] px-5 text-sm font-semibold tracking-[0.1em] text-[var(--accent-contrast)] uppercase transition-colors hover:bg-[var(--accent-hover)] hover:text-[var(--accent-hover-contrast)]"
             >
               Plan your stay
               <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.5} />

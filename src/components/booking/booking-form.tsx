@@ -95,7 +95,7 @@ export function BookingForm({
   }
 
   const fieldClass =
-    "min-h-14 w-full min-w-0 border bg-[var(--background)] px-4 text-base font-medium placeholder:text-[var(--muted)] transition-colors duration-150 hover:border-[var(--muted)] focus:border-[var(--accent-strong)]";
+    "control-boundary min-h-14 w-full min-w-0 border bg-[var(--background)] px-4 text-base font-medium placeholder:text-[var(--muted)] transition-colors duration-150 hover:border-[var(--foreground)] focus:border-[var(--accent-strong)]";
 
   return (
     <form
@@ -134,6 +134,7 @@ export function BookingForm({
             >
               <input
                 {...register("fullName")}
+                required
                 autoComplete="name"
                 placeholder="First and last name"
                 className={cn(
@@ -147,6 +148,7 @@ export function BookingForm({
             <Field label="Email address" error={errors.email?.message}>
               <input
                 {...register("email")}
+                required
                 type="email"
                 autoComplete="email"
                 placeholder="you@example.com"
@@ -161,6 +163,7 @@ export function BookingForm({
             <Field label="Phone number" error={errors.phone?.message}>
               <input
                 {...register("phone")}
+                required
                 type="tel"
                 autoComplete="tel"
                 inputMode="tel"
@@ -194,6 +197,7 @@ export function BookingForm({
               <span className="relative mt-3 block min-w-0">
                 <select
                   {...register("roomSlug")}
+                  required
                   defaultValue={initialRoom}
                   className={cn(
                     fieldClass,
@@ -224,6 +228,7 @@ export function BookingForm({
               <DateControl value={checkIn} invalid={Boolean(errors.checkIn)}>
                 <input
                   {...register("checkIn")}
+                  required
                   type="date"
                   min={new Date().toISOString().slice(0, 10)}
                   className="absolute inset-0 z-10 h-full w-full min-w-0 cursor-pointer opacity-0"
@@ -235,6 +240,7 @@ export function BookingForm({
               <DateControl value={checkOut} invalid={Boolean(errors.checkOut)}>
                 <input
                   {...register("checkOut")}
+                  required
                   type="date"
                   min={checkIn || new Date().toISOString().slice(0, 10)}
                   className="absolute inset-0 z-10 h-full w-full min-w-0 cursor-pointer opacity-0"
@@ -303,7 +309,7 @@ export function BookingForm({
         <div className="flex flex-col gap-4 border-t pt-8 sm:flex-row sm:items-center sm:justify-between">
           <Button
             type="submit"
-            className="min-h-14 w-full justify-between px-6 sm:w-auto sm:min-w-64"
+            className="min-h-14 w-full max-w-full justify-between px-6 whitespace-normal sm:w-auto"
           >
             Send enquiry on WhatsApp
             <SocialIcon name="whatsapp" size={20} />
@@ -360,7 +366,7 @@ function DateControl({
   return (
     <span
       className={cn(
-        "relative mt-3 flex min-h-14 min-w-0 items-center border bg-[var(--background)] px-4 pr-12 transition-colors duration-150 focus-within:border-[var(--accent-strong)] focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-[var(--accent)] hover:border-[var(--muted)]",
+        "control-boundary relative mt-3 flex min-h-14 min-w-0 items-center border bg-[var(--background)] px-4 pr-12 transition-colors duration-150 focus-within:border-[var(--accent-strong)] focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-[var(--accent)] hover:border-[var(--foreground)]",
         invalid && "border-red-700 dark:border-red-400",
       )}
     >

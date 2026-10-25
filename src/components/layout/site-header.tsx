@@ -10,20 +10,17 @@ import { navItems } from "@/data/hotel";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b bg-[var(--header)] backdrop-blur-xl">
-      <div className="page-shell grid h-[4.75rem] grid-cols-[auto_1fr] items-center lg:h-24 lg:grid-cols-[auto_1fr_auto]">
+      <div className="page-shell flex min-h-[4.75rem] flex-wrap items-center justify-between gap-x-4 gap-y-2 py-2 lg:min-h-24">
         <Link
           href="/"
-          className="relative z-10 w-fit"
+          className="relative z-10 min-w-0 shrink-0"
           aria-label="The 12 by Naji Resort home"
         >
           <ResortBrand />
         </Link>
 
-        <nav
-          aria-label="Primary"
-          className="hidden justify-self-center lg:block"
-        >
-          <ul className="flex items-center gap-7 xl:gap-9">
+        <nav aria-label="Primary" className="hidden min-w-0 flex-1 lg:block">
+          <ul className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2 xl:gap-x-9">
             {navItems.map((item) => (
               <li key={item.href}>
                 <NavLink {...item} />
@@ -32,7 +29,7 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex items-center justify-self-end lg:gap-3">
+        <div className="flex shrink-0 items-center lg:gap-3">
           <div className="hidden lg:block">
             <ThemeToggle />
           </div>

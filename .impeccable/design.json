@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-24T01:40:00Z",
+  "generatedAt": "2026-10-25T09:13:56Z",
   "title": "Design System: The 12 by Naji Resort",
   "extensions": {
     "colorMeta": {
@@ -246,7 +246,7 @@
       "refersTo": "button-primary",
       "description": "The single decisive brass action in a composition.",
       "html": "<button class=\"ds-btn-primary\">BOOK NOW</button>",
-      "css": ".ds-btn-primary { min-height:48px; padding:0 20px; border:1px solid var(--accent, #b78b3e); border-radius:0; background:var(--accent, #b78b3e); color:var(--accent-contrast, #121212); font:600 11px/1 Manrope, sans-serif; letter-spacing:.12em; text-transform:uppercase; transition:background-color .2s,border-color .2s; } .ds-btn-primary:hover { background:var(--accent-strong, #76531e); border-color:var(--accent-strong, #76531e); } .ds-btn-primary:focus-visible { outline:2px solid var(--accent, #b78b3e); outline-offset:4px; }"
+      "css": ".ds-btn-primary { min-height:48px; padding:0 20px; border:1px solid var(--accent, #b78b3e); border-radius:0; background:var(--accent, #b78b3e); color:var(--accent-contrast, #121212); font:600 11px/1 Manrope, sans-serif; letter-spacing:.12em; text-transform:uppercase; transition:background-color .2s,border-color .2s,color .2s; } .ds-btn-primary:hover { background:var(--accent-hover, #76531e); border-color:var(--accent-hover, #76531e); color:var(--accent-hover-contrast, #fff); } .ds-btn-primary:focus-visible { outline:2px solid var(--accent, #b78b3e); outline-offset:4px; }"
     },
     {
       "name": "Outline Button",
@@ -262,7 +262,7 @@
       "refersTo": "field",
       "description": "A visible factual label and native control inside a connected planner.",
       "html": "<label class=\"ds-field\"><span>CHECK IN</span><input type=\"date\"></label>",
-      "css": ".ds-field { display:grid; gap:8px; padding:16px 20px; border:1px solid var(--border, #d6d2ca); border-radius:0; background:var(--surface, #fff); color:var(--foreground, #121212); } .ds-field span { font:500 11px/1.4 'Azeret Mono', monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--muted, #68655f); } .ds-field input { border:0; outline:0; background:transparent; color:inherit; font:400 14px/1.5 Manrope, sans-serif; } .ds-field:focus-within { outline:2px solid var(--accent, #b78b3e); outline-offset:2px; }"
+      "css": ".ds-field { display:grid; gap:8px; padding:16px 20px; border:1px solid var(--control-border, #86817a); border-radius:0; background:var(--surface, #fff); color:var(--foreground, #121212); } .ds-field span { font:500 11px/1.4 'Azeret Mono', monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--muted, #68655f); } .ds-field input { border:0; outline:0; background:transparent; color:inherit; font:500 16px/1.5 Manrope, sans-serif; } .ds-field:focus-within { outline:2px solid var(--accent, #b78b3e); outline-offset:2px; }"
     },
     {
       "name": "Primary Navigation",
@@ -276,7 +276,7 @@
       "kind": "custom",
       "description": "A connected architectural row of stay criteria and one brass action.",
       "html": "<form class=\"ds-planner\"><label>CHECK IN<input type=\"date\"></label><label>APARTMENT<select><option>Any apartment</option></select></label><button>PLAN YOUR STAY</button></form>",
-      "css": ".ds-planner { display:grid; grid-template-columns:1fr 1.25fr auto; border:1px solid var(--border, #d6d2ca); background:var(--surface, #fff); } .ds-planner label { display:grid; gap:8px; padding:20px; border-right:1px solid var(--border, #d6d2ca); color:var(--muted, #68655f); font:500 11px/1.4 'Azeret Mono', monospace; letter-spacing:.12em; } .ds-planner input,.ds-planner select { border:0; background:transparent; color:var(--foreground, #121212); font:400 14px/1.5 Manrope, sans-serif; } .ds-planner button { min-width:192px; border:0; border-radius:0; background:var(--accent, #b78b3e); color:#121212; font:600 11px/1 Manrope, sans-serif; letter-spacing:.11em; } .ds-planner button:hover { background:var(--accent-strong, #76531e); } .ds-planner :focus-visible { outline:2px solid var(--accent, #b78b3e); outline-offset:3px; }"
+      "css": ".ds-planner { display:grid; grid-template-columns:1fr 1.25fr auto; border:1px solid var(--border, #d6d2ca); background:var(--surface, #fff); } .ds-planner label { display:grid; gap:8px; padding:20px; border-right:1px solid var(--border, #d6d2ca); color:var(--muted, #68655f); font:500 11px/1.4 'Azeret Mono', monospace; letter-spacing:.12em; } .ds-planner input,.ds-planner select { border:1px solid var(--control-border, #86817a); background:var(--background, #f2f1ed); color:var(--foreground, #121212); font:500 18px/1.5 Manrope, sans-serif; } .ds-planner button { min-width:192px; border:0; border-radius:0; background:var(--accent, #b78b3e); color:var(--accent-contrast, #121212); font:600 11px/1 Manrope, sans-serif; letter-spacing:.11em; } .ds-planner button:hover { background:var(--accent-hover, #76531e); color:var(--accent-hover-contrast, #fff); } .ds-planner :focus-visible { outline:2px solid var(--accent, #b78b3e); outline-offset:3px; }"
     },
     {
       "name": "Room Row",

@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Next.js App Router, React, TypeScript, Tailwind CSS, shadcn/ui, Radix UI, Lucide React, Motion for React, and GSAP/ScrollTrigger where they add clear value. Forms use React Hook Form and Zod. The independent replacement is prepared for GitHub and a Vercel preview before any approved domain migration.
+Next.js App Router, React, TypeScript, Tailwind CSS, shadcn/ui, Radix UI, Lucide React, and Motion for React. Forms use React Hook Form and Zod. The independent replacement is prepared for GitHub and a Vercel preview before any approved domain migration.
 
 ## Users
 

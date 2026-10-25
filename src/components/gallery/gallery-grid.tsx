@@ -4,12 +4,13 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { galleryImages } from "@/data/gallery";
 
 export function GalleryGrid() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const openerRef = useRef<HTMLButtonElement | null>(null);
   const open = selectedIndex !== null;
 
   const selectPrevious = () => {
@@ -48,34 +49,36 @@ export function GalleryGrid() {
         {galleryImages.map((image, index) => {
           const large = index % 7 === 0 || index % 7 === 4;
           return (
-            <Dialog.Trigger asChild key={image.src}>
-              <button
-                type="button"
-                onClick={() => setSelectedIndex(index)}
-                className={`image-plate group relative ${
+            <button
+              key={image.src}
+              type="button"
+              onClick={(event) => {
+                openerRef.current = event.currentTarget;
+                setSelectedIndex(index);
+              }}
+              className={`image-plate group relative ${
+                large
+                  ? "col-span-2 aspect-[4/3] md:col-span-8 md:aspect-[16/10]"
+                  : "col-span-1 aspect-[3/4] md:col-span-4"
+              }`}
+              aria-label={`Open image ${index + 1} of ${galleryImages.length}: ${image.alt}`}
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                quality={70}
+                sizes={
                   large
-                    ? "col-span-2 aspect-[4/3] md:col-span-8 md:aspect-[16/10]"
-                    : "col-span-1 aspect-[3/4] md:col-span-4"
-                }`}
-                aria-label={`Open image ${index + 1} of ${galleryImages.length}: ${image.alt}`}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  quality={70}
-                  sizes={
-                    large
-                      ? "(min-width: 768px) 66vw, 100vw"
-                      : "(min-width: 768px) 33vw, 50vw"
-                  }
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-                />
-                <span className="annotation absolute right-3 bottom-3 bg-[var(--background)] px-3 py-2 text-[var(--foreground)]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </button>
-            </Dialog.Trigger>
+                    ? "(min-width: 768px) 66vw, 100vw"
+                    : "(min-width: 768px) 33vw, 50vw"
+                }
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+              />
+              <span className="annotation absolute right-3 bottom-3 bg-[var(--background)] px-3 py-2 text-[var(--foreground)]">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </button>
           );
         })}
       </div>
@@ -91,7 +94,14 @@ export function GalleryGrid() {
                 exit={{ opacity: 0 }}
               />
             </Dialog.Overlay>
-            <Dialog.Content asChild aria-describedby="gallery-description">
+            <Dialog.Content
+              asChild
+              aria-describedby="gallery-description"
+              onCloseAutoFocus={(event) => {
+                event.preventDefault();
+                openerRef.current?.focus();
+              }}
+            >
               <motion.div
                 className="fixed inset-0 z-50 grid grid-rows-[auto_1fr_auto] p-4 text-white md:p-8"
                 initial={{ opacity: 0, scale: 0.985 }}

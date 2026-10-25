@@ -37,7 +37,7 @@ export function StayPlanner() {
         <span className="annotation text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]">
           Check in
         </span>
-        <span className="relative flex min-h-16 min-w-0 items-center border bg-[var(--background)] px-4 pr-12 transition-[border-color,background-color] duration-150 group-hover:border-[var(--foreground)] focus-within:border-[var(--accent-strong)] focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-[var(--accent)]">
+        <span className="control-boundary relative flex min-h-16 min-w-0 items-center border bg-[var(--background)] px-4 pr-12 transition-[border-color,background-color] duration-150 group-hover:border-[var(--foreground)] focus-within:border-[var(--accent-strong)] focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-[var(--accent)]">
           <span
             aria-hidden="true"
             className="truncate text-lg font-medium tabular-nums"
@@ -67,7 +67,7 @@ export function StayPlanner() {
         <span className="annotation text-[var(--muted)] transition-colors group-hover:text-[var(--foreground)]">
           Check out
         </span>
-        <span className="relative flex min-h-16 min-w-0 items-center border bg-[var(--background)] px-4 pr-12 transition-[border-color,background-color] duration-150 group-hover:border-[var(--foreground)] focus-within:border-[var(--accent-strong)] focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-[var(--accent)]">
+        <span className="control-boundary relative flex min-h-16 min-w-0 items-center border bg-[var(--background)] px-4 pr-12 transition-[border-color,background-color] duration-150 group-hover:border-[var(--foreground)] focus-within:border-[var(--accent-strong)] focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-[var(--accent)]">
           <span
             aria-hidden="true"
             className="truncate text-lg font-medium tabular-nums"
@@ -97,7 +97,7 @@ export function StayPlanner() {
         <span className="relative block min-w-0">
           <select
             name="room"
-            className="min-h-16 w-full min-w-0 cursor-pointer appearance-none border bg-[var(--background)] px-4 pr-12 text-lg font-medium transition-[border-color,background-color] duration-150 hover:border-[var(--foreground)] focus:border-[var(--accent-strong)]"
+            className="control-boundary min-h-16 w-full min-w-0 cursor-pointer appearance-none border bg-[var(--background)] px-4 pr-12 text-lg font-medium transition-[border-color,background-color] duration-150 hover:border-[var(--foreground)] focus:border-[var(--accent-strong)]"
           >
             <option value="">Any apartment</option>
             {rooms.map((option) => (
@@ -116,7 +116,7 @@ export function StayPlanner() {
       </label>
       <button
         type="submit"
-        className="group flex min-h-16 items-center justify-between gap-8 border border-[var(--accent)] bg-[var(--accent)] px-6 text-sm font-bold tracking-[0.1em] text-[var(--accent-contrast)] uppercase transition-[background-color,border-color] duration-150 hover:border-[var(--accent-strong)] hover:bg-[var(--accent-strong)] focus-visible:outline-[var(--foreground)] active:border-[var(--foreground)] active:bg-[var(--accent-strong)] sm:col-span-2 lg:col-span-1 lg:min-w-56"
+        className="group flex min-h-16 min-w-0 items-center justify-between gap-4 border border-[var(--accent)] bg-[var(--accent)] px-6 text-sm font-bold tracking-[0.1em] text-[var(--accent-contrast)] uppercase transition-colors duration-150 hover:border-[var(--accent-hover)] hover:bg-[var(--accent-hover)] hover:text-[var(--accent-hover-contrast)] focus-visible:outline-[var(--foreground)] active:border-[var(--foreground)] active:bg-[var(--accent-hover)] sm:col-span-2 lg:col-span-1"
       >
         Plan your stay
         <ArrowRight

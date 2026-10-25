@@ -6,8 +6,10 @@ const routes = [
   "/gallery",
   "/tours",
   "/events",
+  "/facilities",
   "/book",
   "/contact",
+  "/resort-policy",
 ];
 
 for (const route of routes) {
@@ -110,6 +112,7 @@ test("theme toggle is visible once per breakpoint and changes theme", async ({
   isMobile,
 }) => {
   await page.goto("/");
+  await expect(page.locator("html")).toHaveClass(/light/);
   const headerToggle = page
     .locator("header")
     .getByRole("button", { name: /Switch to (dark|light) theme/ });
@@ -132,6 +135,8 @@ test("theme toggle is visible once per breakpoint and changes theme", async ({
       ? "Switch to light theme"
       : "Switch to dark theme",
   );
+  await page.reload();
+  await expect(page.locator("html")).toHaveClass(/dark/);
 });
 
 test("navigation routes to every dedicated content page", async ({
@@ -201,16 +206,29 @@ test("contact page uses the branded WhatsApp action", async ({ page }) => {
 
 test("gallery supports keyboard navigation and escape", async ({ page }) => {
   await page.goto("/gallery");
-  await page.getByRole("button", { name: /Open image 1 of 30/ }).click();
+  const opener = page.getByRole("button", { name: /Open image 1 of 30/ });
+  await opener.click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("ArrowRight");
   await expect(page.getByRole("dialog")).toContainText("02 / 30");
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toBeHidden();
+  await expect(opener).toBeFocused();
 });
 
 test("booking form exposes validation errors", async ({ page }) => {
   await page.goto("/book");
+  const form = page.getByRole("form", { name: "Room availability enquiry" });
+  for (const label of [
+    "Full name",
+    "Email address",
+    "Phone number",
+    "Apartment",
+    "Check in",
+    "Check out",
+  ]) {
+    await expect(form.getByLabel(label)).toHaveAttribute("required", "");
+  }
   await page.getByRole("button", { name: "Send enquiry on WhatsApp" }).click();
   await expect(page.getByText("Enter your full name")).toBeVisible();
   await expect(
@@ -271,4 +289,50 @@ test("mobile navigation opens and returns focus", async ({
   await expect(page.getByRole("dialog", { name: "Navigation" })).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(trigger).toBeFocused();
+});
+
+test("representative pages reflow at 200% text size", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, "The text resize regression uses a desktop viewport");
+  await page.setViewportSize({ width: 1280, height: 900 });
+
+  for (const route of ["/", "/rooms", "/gallery", "/book", "/contact"]) {
+    await page.goto(route, { waitUntil: "domcontentloaded" });
+    await page.addStyleTag({
+      content: ":root { font-size: 200% !important; }",
+    });
+    const overflows = await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth >
+        document.documentElement.clientWidth,
+    );
+    expect(
+      overflows,
+      `${route} should reflow without horizontal scrolling`,
+    ).toBe(false);
+  }
+});
+
+test("mobile navigation targets meet the 44px floor", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(!isMobile, "Touch-target coverage uses the mobile viewport");
+  await page.goto("/rooms");
+
+  const targets = [
+    page
+      .getByRole("navigation", { name: "Apartment collections" })
+      .getByRole("link", { name: "Elysian" }),
+    page.locator("footer").getByRole("link", { name: "Rooms" }),
+    page.locator("footer").getByRole("link", { name: "Resort Policy" }),
+  ];
+
+  for (const target of targets) {
+    await target.scrollIntoViewIfNeeded();
+    const box = await target.boundingBox();
+    expect(box?.height).toBeGreaterThanOrEqual(44);
+  }
 });

@@ -22,7 +22,7 @@ export function SiteFooter() {
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
-                    className="hover:text-[var(--accent-strong)]"
+                    className="flex min-h-11 w-fit items-center hover:text-[var(--accent-strong)]"
                     href={item.href}
                   >
                     {item.label}
@@ -31,7 +31,7 @@ export function SiteFooter() {
               ))}
               <li>
                 <Link
-                  className="hover:text-[var(--accent-strong)]"
+                  className="flex min-h-11 w-fit items-center hover:text-[var(--accent-strong)]"
                   href="/facilities"
                 >
                   Facilities
@@ -39,7 +39,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  className="hover:text-[var(--accent-strong)]"
+                  className="flex min-h-11 w-fit items-center hover:text-[var(--accent-strong)]"
                   href="/resort-policy"
                 >
                   Resort Policy
@@ -61,10 +61,20 @@ export function SiteFooter() {
             <p className="annotation text-[var(--muted)]">Contact</p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
-                <a href={hotel.phoneHref}>{hotel.phoneDisplay}</a>
+                <a
+                  className="flex min-h-11 items-center"
+                  href={hotel.phoneHref}
+                >
+                  {hotel.phoneDisplay}
+                </a>
               </li>
-              <li className="break-all">
-                <a href={`mailto:${hotel.email}`}>{hotel.email}</a>
+              <li>
+                <a
+                  className="flex min-h-11 min-w-0 items-center break-all"
+                  href={`mailto:${hotel.email}`}
+                >
+                  {hotel.email}
+                </a>
               </li>
             </ul>
             <SocialLinks className="mt-6" />
