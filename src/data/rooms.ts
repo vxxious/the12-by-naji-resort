@@ -1,18 +1,41 @@
 import type { Room, RoomBlock, RoomType } from "@/types/room";
 
+type PublishedRoomType = RoomType | "1-bedroom";
+
+export const roomRates = {
+  elysian: {
+    studio: 120_000,
+    "1-bedroom": 160_000,
+    "2-bedroom": 200_000,
+    "3-bedroom": 280_000,
+  },
+  oasis: {
+    studio: 100_000,
+    "1-bedroom": 140_000,
+    "2-bedroom": 180_000,
+    "3-bedroom": 250_000,
+  },
+} satisfies Record<RoomBlock, Record<PublishedRoomType, number>>;
+
+export const publishedRoomTypes: PublishedRoomType[] = [
+  "studio",
+  "1-bedroom",
+  "2-bedroom",
+  "3-bedroom",
+];
+
 const room = (
   name: string,
   slug: string,
   block: RoomBlock,
   type: RoomType,
-  priceNgn: number,
   photographyPending = false,
 ): Room => ({
   name,
   slug,
   block,
   type,
-  priceNgn,
+  priceNgn: roomRates[block][type],
   images: photographyPending
     ? ["/images/rooms/photography-coming-soon.webp"]
     : Array.from(
@@ -24,23 +47,23 @@ const room = (
 });
 
 export const rooms: Room[] = [
-  room("Bora-Bora", "bora-bora", "elysian", "3-bedroom", 200_000),
-  room("Seychelles", "seychelles", "elysian", "3-bedroom", 200_000),
-  room("Cappadocia", "cappadocia", "elysian", "3-bedroom", 200_000),
-  room("Santorini", "santorini", "elysian", "2-bedroom", 150_000),
-  room("Ibiza", "ibiza", "elysian", "2-bedroom", 150_000),
-  room("Kyoto", "kyoto", "elysian", "2-bedroom", 150_000),
-  room("Monaco", "monaco", "elysian", "studio", 90_000),
-  room("Bali", "bali", "elysian", "studio", 90_000, true),
-  room("Tokyo", "tokyo", "elysian", "studio", 90_000),
-  room("Grandview", "grandview", "oasis", "3-bedroom", 150_000),
-  room("Essence", "essence", "oasis", "3-bedroom", 150_000),
-  room("Palms", "palms", "oasis", "2-bedroom", 120_000),
-  room("Eden", "eden", "oasis", "2-bedroom", 120_000),
-  room("Lotus", "lotus", "oasis", "2-bedroom", 120_000),
-  room("Aurora", "aurora", "oasis", "studio", 70_000, true),
-  room("Hive", "hive", "oasis", "studio", 70_000),
-  room("Renaissance", "renaissance", "oasis", "studio", 70_000, true),
+  room("Bora-Bora", "bora-bora", "elysian", "3-bedroom"),
+  room("Seychelles", "seychelles", "elysian", "3-bedroom"),
+  room("Cappadocia", "cappadocia", "elysian", "3-bedroom"),
+  room("Santorini", "santorini", "elysian", "2-bedroom"),
+  room("Ibiza", "ibiza", "elysian", "2-bedroom"),
+  room("Kyoto", "kyoto", "elysian", "2-bedroom"),
+  room("Monaco", "monaco", "elysian", "studio"),
+  room("Bali", "bali", "elysian", "studio", true),
+  room("Tokyo", "tokyo", "elysian", "studio"),
+  room("Grandview", "grandview", "oasis", "3-bedroom"),
+  room("Essence", "essence", "oasis", "3-bedroom"),
+  room("Palms", "palms", "oasis", "2-bedroom"),
+  room("Eden", "eden", "oasis", "2-bedroom"),
+  room("Lotus", "lotus", "oasis", "2-bedroom"),
+  room("Aurora", "aurora", "oasis", "studio", true),
+  room("Hive", "hive", "oasis", "studio"),
+  room("Renaissance", "renaissance", "oasis", "studio", true),
 ];
 
 export const featuredRooms = ["bora-bora", "santorini", "grandview", "hive"]
@@ -50,7 +73,7 @@ export const featuredRooms = ["bora-bora", "santorini", "grandview", "hive"]
 export const getRoomBySlug = (slug: string) =>
   rooms.find((item) => item.slug === slug);
 
-export const formatRoomType = (type: RoomType) =>
+export const formatRoomType = (type: PublishedRoomType) =>
   type === "studio"
     ? "Studio apartment"
     : `${type.replace("-", " ")} apartment`;

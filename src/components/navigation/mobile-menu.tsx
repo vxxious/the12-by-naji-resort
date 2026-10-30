@@ -8,7 +8,7 @@ import { useState } from "react";
 
 import { ResortBrand } from "@/components/branding/resort-brand";
 import { ThemeToggle } from "@/components/navigation/theme-toggle";
-import { navItems } from "@/data/hotel";
+import { hotel, navItems } from "@/data/hotel";
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ export function MobileMenu() {
       <Dialog.Trigger asChild>
         <button
           type="button"
-          className="group flex size-11 items-center justify-center lg:hidden"
+          className="group flex size-11 items-center justify-center xl:hidden"
           aria-label="Open navigation"
         >
           <Menu
@@ -97,14 +97,27 @@ export function MobileMenu() {
               </div>
               <ThemeToggle />
             </div>
-            <Link
-              href="/book"
-              onClick={() => setOpen(false)}
-              className="flex min-h-14 items-center justify-between bg-[var(--accent)] px-5 text-sm font-semibold tracking-[0.1em] text-[var(--accent-contrast)] uppercase transition-colors hover:bg-[var(--accent-hover)] hover:text-[var(--accent-hover-contrast)]"
-            >
-              Plan your stay
-              <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.5} />
-            </Link>
+            <div className="grid gap-3">
+              <a
+                href={hotel.estateUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpen(false)}
+                aria-label="Visit The 12 by Naji Resort Estate (opens in a new tab)"
+                className="flex min-h-14 items-center justify-between border border-[var(--foreground)] px-5 text-sm font-semibold tracking-[0.1em] uppercase transition-colors hover:bg-[var(--foreground)] hover:text-[var(--background)]"
+              >
+                Visit the Estate
+                <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.5} />
+              </a>
+              <Link
+                href="/book"
+                onClick={() => setOpen(false)}
+                className="flex min-h-14 items-center justify-between bg-[var(--accent)] px-5 text-sm font-semibold tracking-[0.1em] text-[var(--accent-contrast)] uppercase transition-colors hover:bg-[var(--accent-hover)] hover:text-[var(--accent-hover-contrast)]"
+              >
+                Plan your stay
+                <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.5} />
+              </Link>
+            </div>
           </div>
         </Dialog.Content>
       </Dialog.Portal>

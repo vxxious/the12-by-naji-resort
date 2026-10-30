@@ -86,6 +86,50 @@ test("header uses the transparent resort mark", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("publishes the current collection rates", async ({ page }) => {
+  await page.goto("/rooms");
+
+  const elysian = page.locator("#elysian");
+  await expect(elysian).toContainText("₦120,000");
+  await expect(elysian).toContainText("₦160,000");
+  await expect(elysian).toContainText("₦200,000");
+  await expect(elysian).toContainText("₦280,000");
+
+  const oasis = page.locator("#oasis");
+  await expect(oasis).toContainText("₦100,000");
+  await expect(oasis).toContainText("₦140,000");
+  await expect(oasis).toContainText("₦180,000");
+  await expect(oasis).toContainText("₦250,000");
+
+  await page.goto("/rooms/bora-bora");
+  await expect(page.getByText(/₦280,000/).first()).toBeVisible();
+});
+
+test("navigation exposes the verified Estate destination", async ({
+  page,
+  isMobile,
+}) => {
+  await page.goto("/");
+
+  if (isMobile) {
+    await page.getByRole("button", { name: "Open navigation" }).click();
+  }
+
+  const scope = isMobile
+    ? page.getByRole("dialog", { name: "Navigation" })
+    : page.locator("header");
+  const estateLink = scope.getByRole("link", {
+    name: "Visit The 12 by Naji Resort Estate (opens in a new tab)",
+  });
+
+  await expect(estateLink).toBeVisible();
+  await expect(estateLink).toHaveAttribute(
+    "href",
+    "https://www.the12bynajiresortestate.com/",
+  );
+  await expect(estateLink).toHaveAttribute("target", "_blank");
+});
+
 test("social sharing metadata uses the branded Open Graph image", async ({
   page,
 }) => {

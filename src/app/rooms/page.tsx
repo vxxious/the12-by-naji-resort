@@ -3,7 +3,13 @@ import type { Metadata } from "next";
 import { RoomRow } from "@/components/rooms/room-row";
 import { BookingCta } from "@/components/sections/booking-cta";
 import { PageIntro } from "@/components/sections/page-intro";
-import { rooms } from "@/data/rooms";
+import {
+  formatNaira,
+  formatRoomType,
+  publishedRoomTypes,
+  roomRates,
+  rooms,
+} from "@/data/rooms";
 
 export const metadata: Metadata = {
   title: "Apartments and Rooms",
@@ -16,12 +22,12 @@ const collections = [
   {
     id: "elysian",
     name: "Elysian",
-    description: "Three-bedroom, two-bedroom and studio apartments.",
+    description: "Published rates for studio and one- to three-bedroom stays.",
   },
   {
     id: "oasis",
     name: "Oasis",
-    description: "Three-bedroom, two-bedroom and studio apartments.",
+    description: "Published rates for studio and one- to three-bedroom stays.",
   },
 ] as const;
 
@@ -76,6 +82,23 @@ export default function RoomsPage() {
                 <p className="text-sm leading-7 text-[var(--muted)] md:col-span-3 md:col-start-10">
                   {collection.description}
                 </p>
+              </div>
+              <div className="mb-10 border-y py-5">
+                <p className="annotation text-[var(--muted)]">
+                  Current rate guide
+                </p>
+                <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4">
+                  {publishedRoomTypes.map((type) => (
+                    <li key={type}>
+                      <span className="annotation block text-[var(--muted)]">
+                        {formatRoomType(type)}
+                      </span>
+                      <span className="mt-1 block text-lg font-medium tabular-nums">
+                        {formatNaira(roomRates[collection.id][type])}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
               {collectionRooms.map((room, index) => (
                 <RoomRow

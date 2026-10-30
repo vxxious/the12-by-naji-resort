@@ -17,6 +17,7 @@ export const hotel = {
   },
   mapUrl:
     "https://www.google.com/maps/search/?api=1&query=The12%20by%20Naji%20Resort%20Utako%20Abuja",
+  estateUrl: "https://www.the12bynajiresortestate.com/",
   hours: "Open daily, 24 hours",
   checkIn: "14:30",
   checkOut: "12:00",
