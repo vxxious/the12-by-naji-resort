@@ -130,6 +130,34 @@ test("navigation exposes the verified Estate destination", async ({
   await expect(estateLink).toHaveAttribute("target", "_blank");
 });
 
+test("events page presents the past Children’s Day and upcoming events", async ({
+  page,
+}) => {
+  await page.goto("/events");
+
+  await expect(
+    page.getByRole("heading", {
+      name: "More events—and another Children’s Day—are coming.",
+    }),
+  ).toBeVisible();
+  await expect(page.getByText("27 May 2026").first()).toBeVisible();
+  await expect(page.getByText("The Egg Hunt", { exact: true })).toBeVisible();
+  await expect(page.getByText("More events · Coming soon")).toBeVisible();
+  await expect(
+    page.getByRole("img", {
+      name: "Children’s Day Fun Zone 2026 event poster",
+    }),
+  ).toBeVisible();
+
+  const videos = page.locator("video");
+  await expect(videos).toHaveCount(3);
+  for (const video of await videos.all()) {
+    await expect(video).toHaveAttribute("controls", "");
+    await expect(video).toHaveAttribute("playsinline", "");
+    await expect(video).toHaveAttribute("preload", "metadata");
+  }
+});
+
 test("social sharing metadata uses the branded Open Graph image", async ({
   page,
 }) => {
