@@ -137,7 +137,7 @@ test("events page presents the past Children’s Day and upcoming events", async
 
   await expect(
     page.getByRole("heading", {
-      name: "More events—and another Children’s Day—are coming.",
+      name: "More events and another Children’s Day are coming.",
     }),
   ).toBeVisible();
   await expect(page.getByText("27 May 2026").first()).toBeVisible();

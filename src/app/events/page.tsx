@@ -29,7 +29,7 @@ export default function EventsPage() {
               27 May 2026 · Past event
             </p>
             <h1 className="display-title mt-5 text-balance">
-              More events—and another Children’s Day—are coming.
+              More events and another Children’s Day are coming.
             </h1>
           </div>
           <div className="border-t pt-5 md:col-span-3 md:col-start-10">
